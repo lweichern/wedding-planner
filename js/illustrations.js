@@ -38,8 +38,11 @@
   const f2 = (n) => Math.round(n * 100) / 100;
 
   /* ---------------- wisteria ---------------- */
+  let racemeIndex = 0;
   function wisteriaRaceme(rand, x, y, len, scale) {
-    const g = el("g", { transform: `translate(${f2(x)} ${f2(y)}) scale(${f2(scale)})` });
+    const outer = el("g", { transform: `translate(${f2(x)} ${f2(y)}) scale(${f2(scale)})` });
+    const g = el("g", { class: "sway", style: `--i:${racemeIndex++ % 9};--d:${f2(4.2 + rand() * 2.4)}s` });
+    outer.appendChild(g);
     // stem
     g.appendChild(el("path", { d: `M0 0 q ${f2(rand() * 4 - 2)} ${f2(len * 0.5)} ${f2(rand() * 3 - 1.5)} ${f2(len * 0.96)}`, fill: "none", stroke: "#5f4a6e", "stroke-width": "1.1", "stroke-linecap": "round" }));
     // leaflets at the top
@@ -65,7 +68,7 @@
     hl.setAttribute("fill", "url(#p-stitch)");
     hl.setAttribute("stroke", "none");
     g.appendChild(hl);
-    return g;
+    return outer;
   }
 
   function wisteriaCanopy(container, opts) {
@@ -97,8 +100,9 @@
   /* ---------------- roses ---------------- */
   const ROSES = ["#s-rose-pink", "#s-rose-wine", "#s-rose-cream", "#s-rose-pink"];
 
+  let bloomIndex = 0;
   function roseCluster(rand, cx, cy, size, variant) {
-    const g = el("g");
+    const g = el("g", { class: "bloom", style: `--i:${bloomIndex++ % 12}` });
     // leaves fanning out behind
     const leaves = 2 + Math.floor(rand() * 2);
     for (let i = 0; i < leaves; i++) {
@@ -173,7 +177,9 @@
       root.appendChild(el("use", { href: "#s-leaf", x: f2(px), y: f2(py - lw * 0.33), width: f2(lw), height: f2(lw * 0.66), transform: `rotate(${f2(deg + 150 + rand() * 20)} ${f2(px)} ${f2(py)})` }));
       if (i % 2 === 0) {
         const size = 24 + rand() * 14;
-        root.appendChild(el("use", { href: ROSES[i % ROSES.length], x: f2(px - size / 2), y: f2(py - size / 2), width: f2(size), height: f2(size), transform: `rotate(${f2(rand() * 60)} ${f2(px)} ${f2(py)})` }));
+        const b = el("g", { class: "bloom", style: `--i:${bloomIndex++ % 12}` });
+        b.appendChild(el("use", { href: ROSES[i % ROSES.length], x: f2(px - size / 2), y: f2(py - size / 2), width: f2(size), height: f2(size), transform: `rotate(${f2(rand() * 60)} ${f2(px)} ${f2(py)})` }));
+        root.appendChild(b);
       }
     }
     // roses climbing the legs

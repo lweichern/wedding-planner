@@ -155,9 +155,10 @@
     const dayIso = W.date.slice(0, 10);
     const offset = W.date.slice(19) || "+02:00";
     list.replaceChildren(
-      ...W.timeline.map((item) => {
+      ...W.timeline.map((item, idx) => {
         const li = document.createElement("li");
         li.className = "tl-item";
+        li.style.setProperty("--i", String(idx));
         li.innerHTML =
           `<div class="tl-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-${item.icon}"/></svg></div>` +
           `<div class="tl-pearl" aria-hidden="true"></div>` +
@@ -183,6 +184,7 @@
       env.setAttribute("aria-hidden", "true");
       try { sessionStorage.setItem("envelopeSeen", "1"); } catch (e) { /* ignore */ }
       startReveal();
+      openCurtain();
     };
 
     if (seen || reduceMotion || location.hash) {
@@ -205,6 +207,83 @@
     env.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
     skip.addEventListener("click", (e) => { e.stopPropagation(); clearTimeout(auto); opened = true; finish(); });
     env.focus({ preventScroll: true });
+  }
+
+  /* ---------------- curtain reveal + guided tour ---------------- */
+  function openCurtain() {
+    const hero = $("#home");
+    if (reduceMotion || location.hash) {
+      hero.classList.add("open");
+      return;
+    }
+    // two frames so the closed state is painted before the transition starts
+    requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add("open")));
+    setTimeout(startTour, 5200);
+  }
+
+  const tour = { running: false, pos: 0, last: 0, speed: 46, raf: 0, btn: null, started: false };
+  function tourLabel() {
+    if (!tour.btn) return;
+    $(".tour-label", tour.btn).textContent = tour.running ? t("tour.pause") : t("tour.play");
+    tour.btn.setAttribute("aria-label", t("tour.aria"));
+    tour.btn.setAttribute("aria-pressed", tour.running ? "true" : "false");
+    tour.btn.classList.toggle("paused", !tour.running);
+  }
+  function tourStep(now) {
+    if (!tour.running) return;
+    const dt = Math.min(64, now - tour.last);
+    tour.last = now;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    tour.pos = Math.min(max, tour.pos + (tour.speed * dt) / 1000);
+    window.scrollTo({ top: Math.round(tour.pos), behavior: "instant" });
+    if (tour.pos >= max - 1) { tourStop(); tour.btn.hidden = true; return; }
+    tour.raf = requestAnimationFrame(tourStep);
+  }
+  function tourStart() {
+    if (reduceMotion || tour.running) return;
+    tour.running = true;
+    tour.pos = window.scrollY;
+    tour.last = performance.now();
+    tour.btn.hidden = false;
+    tourLabel();
+    tour.raf = requestAnimationFrame(tourStep);
+  }
+  function tourStop() {
+    if (!tour.running) return;
+    tour.running = false;
+    cancelAnimationFrame(tour.raf);
+    tourLabel();
+  }
+  function startTour() {
+    if (tour.started || reduceMotion) return;
+    tour.started = true;
+    tour.btn = $("#tour");
+    tour.btn.addEventListener("click", () => (tour.running ? tourStop() : tourStart()));
+    // any gesture from the guest hands control back to them
+    const pause = (e) => { if (tour.btn.contains(e.target)) return; tourStop(); };
+    window.addEventListener("wheel", pause, { passive: true });
+    window.addEventListener("touchstart", pause, { passive: true });
+    window.addEventListener("pointerdown", pause, { passive: true });
+    window.addEventListener("keydown", (e) => { if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", " ", "Home", "End", "Tab"].includes(e.key)) tourStop(); });
+    document.addEventListener("focusin", (e) => { if (e.target.matches("input, textarea, select")) tourStop(); });
+    document.addEventListener("visibilitychange", () => { if (document.hidden) tourStop(); });
+    tourStart();
+  }
+
+  /* ---------------- hero parallax ---------------- */
+  function initParallax() {
+    if (reduceMotion) return;
+    const hero = $("#home");
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        hero.style.setProperty("--py", y < hero.offsetHeight ? (y * 0.07).toFixed(1) + "px" : "0px");
+        ticking = false;
+      });
+    }, { passive: true });
   }
 
   /* ---------------- scroll reveal + nav ---------------- */
@@ -347,6 +426,9 @@
     countTimer = setInterval(renderCountdown, 30000);
     $("#lang-toggle").addEventListener("click", () => applyLang(lang === "en" ? "fr" : "en"));
     initRsvp();
+    initParallax();
     initEnvelope();
+    if (reduceMotion) { const sp = $(".sprite"); if (sp && sp.pauseAnimations) sp.pauseAnimations(); }
+    $("#lang-toggle").addEventListener("click", tourLabel);
   });
 })();

@@ -112,6 +112,9 @@ window.I18N = {
 
     "footer.made": "Made with love by",
     "footer.back": "Back to top",
+    "tour.pause": "Pause tour",
+    "tour.play": "Resume tour",
+    "tour.aria": "Automatic scrolling through the invitation",
   },
 
   fr: {
@@ -222,5 +225,8 @@ window.I18N = {
 
     "footer.made": "Réalisé avec amour par",
     "footer.back": "Retour en haut",
+    "tour.pause": "Pause",
+    "tour.play": "Reprendre",
+    "tour.aria": "Défilement automatique du faire-part",
   },
 };
