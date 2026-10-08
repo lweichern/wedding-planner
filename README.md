@@ -121,3 +121,13 @@ wedding in a villa above the Val d'Orcia, in English and Italian. Open
   button is a wax seal that presses down and stamps your reply.
 - Deckled parchment cards, a hand-written letter from the couple, ink
   drawings of the villa, an olive branch, a bicycle and an oak.
+- **One motion language.** A single easing family (a soft settle for things
+  that land, a paper ease for things that fold, an overshoot for stamps),
+  three durations and one stagger step, defined as tokens at the top of
+  `wax/styles.css`. Seals stamp and ripple their vellum band, titles print
+  from the baseline, hairlines draw before their text, wax drops fall into
+  the swatch row, ink drawings draw themselves stroke by stroke, the reply
+  card unfolds, the countdown counts up, and switching language turns the
+  page. Every control answers a touch: underlines grow, the focus line
+  fills from the centre, a checked wax dot drips in, the seal sinks and
+  rings when pressed.

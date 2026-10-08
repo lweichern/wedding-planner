@@ -31,7 +31,7 @@
     $$("[data-time]").forEach((n) => (n.textContent = fmtTime(get(n.dataset.time))));
     $$("[data-date]").forEach((n) => (n.textContent = fmtDate(get(n.dataset.date))));
     $$("[data-date-long]").forEach((n) => (n.textContent = fmtDate(get(n.dataset.dateLong), { weekday: "long" })));
-    renderTimeline(); renderCountdown(); tourLabel();
+    renderTimeline(); renderCountdown(false); tourLabel();
     try { localStorage.setItem("lang", lang); } catch (e) { /* ignore */ }
   }
   function initialLang() {
@@ -48,6 +48,35 @@
       try { o = JSON.parse(n.dataset.seal); } catch (e) { /* ignore */ }
       if (o.motif === "monogram" && !o.text) o.text = W.couple.monogram;
       window.Wax.seal(n, o);
+    });
+  }
+
+  /* ---------------- ink drawings: inline the symbol so each path can draw itself ---------------- */
+  function inkInk() {
+    $$("svg.ink").forEach((svg) => {
+      const use = $("use", svg);
+      if (!use) return;
+      const sym = document.querySelector(use.getAttribute("href"));
+      if (!sym) return;
+      svg.replaceChildren(...Array.from(sym.childNodes).map((n) => n.cloneNode(true)));
+      const paths = $$("path", svg);
+      const total = paths.reduce((a, p) => a + p.getTotalLength(), 0);
+      let acc = 0;
+      paths.forEach((p) => {
+        const L = p.getTotalLength();
+        p.style.setProperty("--len", L.toFixed(1));
+        // each stroke starts when the previous one is mostly done, so the pen moves on
+        p.style.setProperty("--d", (0.15 + (acc / total) * 1.1).toFixed(2) + "s");
+        p.style.setProperty("--draw", (0.4 + (L / total) * 1.2).toFixed(2) + "s");
+        acc += L;
+      });
+    });
+  }
+  function stagger() {
+    $$(".reveal").forEach((sec) => Array.from(sec.children).forEach((c, i) => c.style.setProperty("--i", String(i))));
+    $$(".facts div, .swatches li, .rsvp-form .field").forEach((n, i, arr) => {
+      const parent = n.parentElement;
+      n.style.setProperty("--j", String(Array.from(parent.children).indexOf(n)));
     });
   }
 
@@ -80,13 +109,25 @@
   }
 
   /* ---------------- countdown ---------------- */
-  let countTimer;
-  function renderCountdown() {
+  let countTimer, counted = false;
+  function tween(el, to, pad, dur) {
+    const start = performance.now();
+    const step = (now) => {
+      const k = Math.min(1, (now - start) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = String(Math.round(to * e)).padStart(pad, "0");
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  function renderCountdown(animate) {
     const box = $("#countdown"), diff = new Date(W.date).getTime() - Date.now(), until = $(".count-until", box);
     if (diff <= 0) { $$("[data-count]", box).forEach((n) => (n.textContent = "0")); until.textContent = diff > -43200000 ? t("count.today") : t("count.past"); clearInterval(countTimer); return; }
-    $("[data-count=days]", box).textContent = String(Math.floor(diff / 86400000));
-    $("[data-count=hours]", box).textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
-    $("[data-count=mins]", box).textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+    const v = { days: [Math.floor(diff / 86400000), 1], hours: [Math.floor((diff % 86400000) / 3600000), 2], mins: [Math.floor((diff % 3600000) / 60000), 2] };
+    Object.keys(v).forEach((k, i) => {
+      const el = $(`[data-count=${k}]`, box);
+      if (animate && !reduceMotion) setTimeout(() => tween(el, v[k][0], v[k][1], 1400), i * 160);
+      else el.textContent = String(v[k][0]).padStart(v[k][1], "0");
+    });
     until.textContent = t("count.until");
   }
 
@@ -135,6 +176,8 @@
       progress = 1; paint();
       env.classList.remove("holding");
       env.classList.add("broken");
+      const glow = $(".candlelight.glow");
+      glow.classList.add("flare"); setTimeout(() => glow.classList.remove("flare"), 1000);
       setTimeout(() => env.classList.add("unfold"), 450);
       setTimeout(() => env.classList.add("rise"), 1250);
       setTimeout(finish, 2100);
@@ -147,11 +190,12 @@
       if (progress >= 1) { breakSeal(); return; }
       if (holding || progress > 0) raf = requestAnimationFrame(tick);
     };
+    const hint = $(".env-hint", env);
     const start = (e) => {
       if (broken || (e && skip.contains(e.target))) return;
-      holding = true; env.classList.add("holding"); last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);
+      holding = true; env.classList.add("holding"); hint.textContent = t("seal.holding"); last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);
     };
-    const stop = () => { if (!holding) return; holding = false; env.classList.remove("cracked"); };
+    const stop = () => { if (!holding) return; holding = false; env.classList.remove("cracked"); if (!broken) hint.textContent = t("seal.hold"); };
     env.addEventListener("pointerdown", (e) => { if (e.pointerType === "mouse" && e.button !== 0) return; start(e); try { env.setPointerCapture(e.pointerId); } catch (x) { /* ignore */ } });
     env.addEventListener("pointerup", stop); env.addEventListener("pointercancel", stop); env.addEventListener("pointerleave", stop);
     env.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); breakSeal(); } });
@@ -165,7 +209,8 @@
     const hero = $("#home");
     if (reduceMotion || (location.hash && location.hash !== "#home")) { hero.classList.add("open"); return; }
     requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add("open")));
-    setTimeout(startTour, 5600);
+    setTimeout(() => { if (!counted) { counted = true; renderCountdown(true); } }, 3400);
+    setTimeout(startTour, 6400);
   }
 
   /* ---------------- reveal + nav ---------------- */
@@ -262,10 +307,17 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     pressSeals();
+    inkInk();
+    stagger();
     bindConfig();
     applyLang(initialLang());
-    countTimer = setInterval(renderCountdown, 30000);
-    $("#lang-toggle").addEventListener("click", () => applyLang(lang === "en" ? "it" : "en"));
+    countTimer = setInterval(() => renderCountdown(false), 30000);
+    $("#lang-toggle").addEventListener("click", () => {
+      const next = lang === "en" ? "it" : "en";
+      if (reduceMotion) { applyLang(next); return; }
+      document.documentElement.classList.add("lang-switching");
+      setTimeout(() => { applyLang(next); document.documentElement.classList.remove("lang-switching"); }, 230);
+    });
     initRsvp();
     initIntro();
   });
