@@ -1,58 +1,54 @@
-# Embroidered wedding e-invitation
+# The Garden Invitation
 
-A single-page mobile-first wedding invitation in a hand-embroidered style: an
-envelope that opens on tap, a pleated pearl-trimmed curtain, a stitched
-château with wisteria, roses, swans, a countdown, timeline, recovery day,
-gifts note and a full RSVP form. Everything is vector and generated in the
-browser, so there are no image downloads.
+A complete, mobile-first wedding e-invitation inspired by illustrated French wedding stationery. Built with Vite, vanilla JavaScript, Express, and SQLite. Requires Node.js 24 or newer.
 
-Open `index.html` directly in a browser, or serve the folder with any static
-host (GitHub Pages, Netlify, Vercel, an S3 bucket). There is no build step.
+## Run
 
-## Structure
+```sh
+npm ci
+npm run dev
+```
 
-| Path | What it does |
-| --- | --- |
-| `index.html` | Page markup plus the SVG sprite that holds every illustration (château, curtain, swans, figures, icons, frames, garden) |
-| `css/styles.css` | Design tokens, linen texture, envelope animation, section layouts, form styling |
-| `js/config.js` | Names, dates, venues, timeline, RSVP endpoint. **Edit this file for a new wedding.** |
-| `js/i18n.js` | Every visible string in English and French |
-| `js/illustrations.js` | Procedural embroidery: wisteria canopies, rose borders and columns, the floral arch (seeded, so identical on every load) |
-| `js/main.js` | Envelope intro, language switch, config bindings, countdown, timeline, Maps and `.ics` links, RSVP validation and submission |
+The app listens on port **3000** (override with `PORT`). The same server handles the invitation and its RSVP API.
 
-## Customising
+For production:
 
-1. Edit `js/config.js`: couple names and monogram, wedding date (ISO 8601
-   with offset), RSVP deadline, both venues with addresses, shuttle origin,
-   the timeline rows, and the RSVP delivery.
-2. Edit the copy in `js/i18n.js` (welcome text, dress code advice, your
-   story, timeline titles and notes). Keep both languages in sync.
-3. Change colours in the `:root` block at the top of `css/styles.css`.
+```sh
+npm run build
+npm start
+```
 
-### RSVP delivery
+## Personalize
 
-`WEDDING.rsvp.endpoint` can be any URL that accepts a JSON `POST` (Formspree,
-Netlify Forms via a function, Google Apps Script, your own API). The payload
-contains `name`, `email`, `attending`, `diet`, `shuttle`, `message`, `lang`
-and `submittedAt`. When the endpoint is left empty the form falls back to a
-pre-filled email to `WEDDING.rsvp.email`.
+Edit `src/wedding.js` for names, initials, date, venue, map URL, story, RSVP deadline, and sample mode. Keep the date labels consistent with the ISO timestamp; its explicit timezone offset drives the countdown and calendar download.
 
-Drafts are saved in the guest's browser until the reply is sent, so an
-interrupted guest does not lose a long message.
+Additional invitation copy, the event schedule, next-day gathering, and FAQ are in `src/main.js`. Visual tokens and responsive styles are in `src/style.css`. Page title and description are in `index.html`.
 
-## What was fixed compared with the reference reel
+All wedding details are samples. The venue illustration is original generated artwork inspired by French country estates, not a factual illustration of the named venue. The supplied invitation is not a booking or a real event announcement. Review all copy before sharing and set `isSample` to `false` when replacing the sample event.
 
-| Weak point in the reference | How this version handles it |
-| --- | --- |
-| French headings mixed with English body copy and forms | One language at a time, with an EN / FR toggle that switches every string |
-| Seven-second intro that cannot be skipped | Envelope opens on tap, Enter, or on its own after 1.8 s. A Skip button is always visible. Reduced-motion users and deep links go straight to the page, and it plays once per session |
-| Heavy raster textures that stall on mobile data | All illustrations are SVG symbols or generated in JS. Page weight is a few hundred kilobytes including fonts |
-| Thin italic body copy on pink, hard to read | Upright EB Garamond at 17.6 px, ink `#2f2128` on blush `#f4e7ea` (12.6:1 contrast). Italic is reserved for short accents |
-| Flat black RSVP button out of keeping with the design | Burgundy gradient button with a gold hairline and pearl shadow, matching the palette |
-| Countdown as a separate heavy section | Three small pearl-ringed badges inside the hero |
-| No way for the couple to reply | Optional email field, validated when filled |
+## Included
 
-Other details: Open in Maps links, downloadable calendar files with a
-reminder the day before, a sticky section nav after the hero, a skip link
-and focus styles for keyboard users, and all decorative SVG is hidden from
-screen readers.
+- Custom château artwork, botanical illustrations, locally bundled fonts, textured paper palette.
+- Optional two-stage monogram/paper-gate and curtain animation with skip, replay, focus management, and reduced-motion support.
+- Live wedding countdown, illustrated timeline, venue map link, timezone-correct `.ics` calendar export.
+- Dress code, next-day gathering, gifts note, expandable FAQs.
+- RSVP form with conditional attendance fields, validation, persistent storage, confirmation, error recovery, and editing from the same browser.
+- Responsive layouts tested at 360, 390, 768, and 1440 pixels.
+
+## RSVP storage
+
+Responses are saved on the server to `.data/rsvps.sqlite`; this file is intentionally ignored by Git. Override its location with `RSVP_DB_PATH`. The server validates input and uses parameterized queries. A response token stored in the guest's browser is required to update a response for the same email.
+
+The browser keeps the submitted response and edit token locally to support repeat visits. Clearing browser storage removes that browser's ability to edit an existing response. No confirmation email is sent, and no email service or third-party RSVP provider is configured.
+
+For a public deployment, use a Node host with a persistent writable disk, preserve/back up the SQLite database, and configure HTTPS. The current implementation does not include an organizer dashboard or guest-specific invitation authentication.
+
+## Verify
+
+```sh
+npm test
+```
+
+Tests build and run the production app against a temporary database. They cover API validation and persistence, unauthorized edit prevention, responsive rendering and asset loading, opening/replay/skip, RSVP acceptance and decline, offline failure recovery, calendar timezone output, FAQs, and reduced motion.
+
+Browser tests use `/usr/bin/chromium` by default. Set `CHROMIUM_PATH` to use a different installed Chromium executable. Test responses do not touch the development database.
