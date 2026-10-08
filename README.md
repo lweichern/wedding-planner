@@ -100,3 +100,24 @@ Instrument Sans and DM Mono, with one cobalt accent. Its own ideas:
 - **Editorial details.** A story headlined with its live word count, a drop
   cap, pull quotes, a schedule set as a table, colour swatches for the dress
   code, a reply card with a cut line, and a colophon.
+
+## Wax seal and vellum variant
+
+`wax/` is a fourth invitation: a sealed parchment letter for a candlelit
+wedding in a villa above the Val d'Orcia, in English and Italian. Open
+`wax/index.html`. Its own ideas:
+
+- **Break the seal.** The page arrives as a folded letter closed with
+  burgundy wax. Press and hold: cracks spread through the wax, the seal
+  splits and falls away, the flap lifts and the letter opens into the site.
+  A tap, Enter or the auto-open do the same.
+- **Candlelight.** A candle in the corner flickers and the light on the
+  parchment breathes with it, warm near the flame and shaded at the edges.
+- **Vellum.** A translucent vellum sheet slides off the names after the
+  letter opens, and every chapter title sits on its own vellum band.
+- **A seal for every chapter.** Olive branch, key, moon, bee, candle, laurel
+  and rings, pressed in burgundy, forest, navy and old gold. Every seal is
+  generated (`seals.js`), so no two rims or drips are alike. The RSVP
+  button is a wax seal that presses down and stamps your reply.
+- Deckled parchment cards, a hand-written letter from the couple, ink
+  drawings of the villa, an olive branch, a bicycle and an oak.
