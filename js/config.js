@@ -59,5 +59,5 @@ window.WEDDING = {
   credit: { name: "", url: "" },
 
   /* Envelope intro: milliseconds before it opens on its own. */
-  intro: { autoOpenAfter: 1800 },
+  intro: { autoOpenAfter: 1300 },
 };

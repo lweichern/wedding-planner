@@ -168,68 +168,73 @@ svg { display: block; }
 }
 
 /* ------------------------------------------------------------------
-   Envelope intro
+   Box intro
+   Two satin box halves, slightly ajar so the embroidered scene shows
+   through the seam. The left half slides away first, then the right
+   half carries the monogram seal off with it.
    ------------------------------------------------------------------ */
 .envelope {
   position: fixed; inset: 0; z-index: 50;
-  display: grid; place-items: center;
   cursor: pointer; overflow: hidden;
   background: transparent;
 }
 .envelope.gone { display: none; }
 .env-flap {
-  position: absolute; top: 0; bottom: 0; width: 50.5%;
-  background: linear-gradient(135deg, #a3a8a0 0%, #8e948c 55%, #7f857d 100%);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
-  transition: transform 1.5s cubic-bezier(.7, 0, .3, 1);
+  position: absolute; top: 0; bottom: 0; width: 44.5%;
+  background:
+    linear-gradient(90deg, #8f948b 0%, #a8ada4 14%, #c3c7be 24%, #a9ada5 36%, #8e938b 56%, #7f847d 78%, #878c85 100%);
+  transition: transform 1.75s cubic-bezier(.7, 0, .25, 1);
   will-change: transform;
 }
-.env-left { left: 0; border-right: 1px solid rgba(60,50,55,.35); }
-.env-right { right: 0; border-left: 1px solid rgba(255,255,255,.18); }
+.env-left { left: 0; box-shadow: 10px 0 24px rgba(20, 26, 20, .32); }
+.env-right { right: 0; box-shadow: -10px 0 24px rgba(20, 26, 20, .32); }
 .env-weave {
   position: absolute; inset: 0;
   background-image:
-    repeating-linear-gradient(0deg, rgba(0,0,0,.07) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 1px, transparent 1px 3px);
+    repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 1px, transparent 1px 3px);
 }
+.env-sheen {
+  position: absolute; inset: -40% -20%;
+  background: linear-gradient(100deg, transparent 38%, rgba(255,255,255,.16) 50%, transparent 62%);
+  animation: box-sheen 7s ease-in-out infinite;
+}
+@keyframes box-sheen { 0% { transform: translateX(-30%); } 100% { transform: translateX(30%); } }
 .env-left::after, .env-right::after {
-  content: ""; position: absolute; top: 0; bottom: 0; width: 46px;
-  background: linear-gradient(90deg, rgba(0,0,0,.18), transparent);
+  content: ""; position: absolute; top: 0; bottom: 0; width: 3px;
 }
-.env-left::after { right: 0; transform: scaleX(-1); }
-.env-right::after { left: 0; }
-.env-stamp { position: absolute; top: 28px; right: 28px; width: 84px; height: 84px; transform: rotate(4deg); opacity: .95; }
+.env-left::after { right: 0; background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.2)); }
+.env-right::after { left: 0; background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.3)); }
 
 .env-seal {
-  position: relative; z-index: 2; width: min(46vw, 190px);
-  transition: transform .9s var(--ease), opacity .7s var(--ease);
-  animation: seal-breathe 3.2s ease-in-out infinite;
+  position: absolute; left: 0; top: 50%; z-index: 2;
+  width: min(42vw, 180px);
+  transform: translate(-50%, -50%);
 }
-.env-seal svg { width: 100%; height: auto; overflow: visible; }
-@keyframes seal-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+.env-seal svg { width: 100%; height: auto; overflow: visible; animation: seal-breathe 3.2s ease-in-out infinite; }
+@keyframes seal-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
 
 .env-hint {
-  position: absolute; left: 0; right: 0; bottom: 20vh; z-index: 2;
-  margin: 0; text-align: center;
-  font-family: var(--font-display); font-size: 1.05rem; letter-spacing: .3em; text-transform: uppercase;
-  color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.35);
+  position: absolute; left: 50%; bottom: 16vh; z-index: 3; transform: translateX(-50%);
+  margin: 0; padding: .5rem 1.1rem; border-radius: 999px;
+  background: rgba(40, 46, 40, .55); color: #fff;
+  font-family: var(--font-display); font-size: .95rem; letter-spacing: .28em; text-transform: uppercase; white-space: nowrap;
   animation: hint-pulse 2.4s ease-in-out infinite;
 }
-@keyframes hint-pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes hint-pulse { 0%,100% { opacity: .6; } 50% { opacity: 1; } }
 
 .env-skip {
   position: absolute; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 3;
-  background: rgba(255,255,255,.14); color: #fff;
+  background: rgba(40, 46, 40, .5); color: #fff;
   border: 1px solid rgba(255,255,255,.55); border-radius: 999px;
   font-family: var(--font-display); font-size: .85rem; letter-spacing: .18em; text-transform: uppercase;
   padding: .55rem 1rem; cursor: pointer;
 }
-.env-skip:hover, .env-skip:focus-visible { background: rgba(255,255,255,.26); }
+.env-skip:hover, .env-skip:focus-visible { background: rgba(40, 46, 40, .7); }
 
 .envelope.open { cursor: default; pointer-events: none; }
-.envelope.open .env-left { transform: translateX(-102%); }
-.envelope.open .env-right { transform: translateX(102%); }
-.envelope.open .env-seal { animation: none; transform: scale(.4) rotate(-6deg); opacity: 0; }
+.envelope.open .env-left { transform: translateX(-115%); }
+.envelope.open .env-right { transform: translateX(115%); transition-delay: 1.05s; }
 .envelope.open .env-hint, .envelope.open .env-skip { opacity: 0; transition: opacity .3s; }
 
 body.intro-locked { overflow: hidden; }

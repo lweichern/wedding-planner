@@ -184,8 +184,10 @@
       env.setAttribute("aria-hidden", "true");
       try { sessionStorage.setItem("envelopeSeen", "1"); } catch (e) { /* ignore */ }
       startReveal();
-      openCurtain();
+      openCurtainOnce();
     };
+    let curtainDone = false;
+    const openCurtainOnce = () => { if (!curtainDone) { curtainDone = true; openCurtain(); } };
 
     if (seen || reduceMotion || location.hash) {
       finish();
@@ -199,7 +201,10 @@
       opened = true;
       clearTimeout(auto);
       env.classList.add("open");
-      setTimeout(finish, 1500);
+      // the curtain starts parting while the box is still sliding away,
+      // so the whole thing reads as one continuous reveal
+      setTimeout(openCurtainOnce, 900);
+      setTimeout(finish, 2950);
     };
     const auto = setTimeout(open, (W.intro && W.intro.autoOpenAfter) || 1800);
 

@@ -598,12 +598,6 @@
       </g>
     </symbol>
 
-    <!-- ENVELOPE (wax seal + linen) -->
-    <symbol id="s-env-stamp" viewBox="0 0 60 60">
-      <rect x="4" y="4" width="52" height="52" fill="#f6ecee" stroke="#c9a46c" stroke-width="1" stroke-dasharray="2.5 2.5"/>
-      <use href="#s-chateau" x="8" y="12" width="44" height="30"/>
-      <text x="30" y="52" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="7" letter-spacing="1" fill="#8a6436">BOURGOGNE</text>
-    </symbol>
   </defs>
 </svg>
 
@@ -613,13 +607,10 @@
      always be skipped, is skipped automatically for reduced-motion
      users, and plays once per visit.
      ============================================================ -->
-<div id="envelope" class="envelope" role="button" tabindex="0" aria-label="Wedding invitation envelope. Press enter or tap to open." data-i18n-aria="envelope.aria">
-  <div class="env-flap env-left" aria-hidden="true"><span class="env-weave"></span></div>
-  <div class="env-flap env-right" aria-hidden="true"><span class="env-weave"></span>
-    <svg class="env-stamp" viewBox="0 0 60 60" aria-hidden="true"><use href="#s-env-stamp"/></svg>
-  </div>
-  <div class="env-seal" aria-hidden="true">
-    <svg viewBox="0 0 160 160"><use href="#s-seal"/></svg>
+<div id="envelope" class="envelope" role="button" tabindex="0" aria-label="Wedding invitation box. Press enter or tap to open." data-i18n-aria="envelope.aria">
+  <div class="env-flap env-left" aria-hidden="true"><span class="env-weave"></span><span class="env-sheen"></span></div>
+  <div class="env-flap env-right" aria-hidden="true"><span class="env-weave"></span><span class="env-sheen"></span>
+    <div class="env-seal"><svg viewBox="0 0 160 160"><use href="#s-seal"/></svg></div>
   </div>
   <p class="env-hint" data-i18n="envelope.tap">Tap to open</p>
   <button type="button" class="env-skip" id="env-skip" data-i18n="envelope.skip">Skip intro</button>
