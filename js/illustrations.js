@@ -4,6 +4,12 @@
    floral arch) are generated here so each blossom can vary slightly,
    the way hand-stitched work does. A seeded random keeps the result
    identical on every load.
+
+   Performance note: every piece that moves on its own (a swaying
+   raceme, a blooming rose) is emitted as its own small <svg> element,
+   absolutely positioned inside the container. The embroidery filter is
+   then rendered once per piece and the motion is a composited CSS
+   transform on an HTML element, so nothing is re-filtered per frame.
    ------------------------------------------------------------------ */
 (function () {
   "use strict";
@@ -30,23 +36,42 @@
     return n;
   }
 
-  function svgRoot(vbW, vbH, extra) {
-    const s = el("svg", Object.assign({ viewBox: `0 0 ${vbW} ${vbH}`, "aria-hidden": "true", focusable: "false" }, extra || {}));
-    return s;
+  const f2 = (n) => Math.round(n * 100) / 100;
+  const pct = (v, total) => f2((v / total) * 100) + "%";
+
+  /* A composition: a container with a fixed aspect ratio, one static
+     background svg, and any number of positioned "piece" svgs. */
+  function composition(container, W, H) {
+    container.replaceChildren();
+    container.classList.add("emb");
+    container.style.aspectRatio = `${W} / ${H}`;
+    const base = el("svg", { viewBox: `0 0 ${W} ${H}`, class: "emb-base", "aria-hidden": "true", focusable: "false" });
+    container.appendChild(base);
+    return {
+      base,
+      /* box: {x, y, w, h} in composition units; cls: class names; style: inline vars */
+      piece(box, cls, style) {
+        const s = el("svg", {
+          viewBox: `${f2(box.x)} ${f2(box.y)} ${f2(box.w)} ${f2(box.h)}`,
+          class: "emb-piece " + cls,
+          "aria-hidden": "true", focusable: "false",
+        });
+        s.style.left = pct(box.x, W);
+        s.style.top = pct(box.y, H);
+        s.style.width = pct(box.w, W);
+        if (style) s.setAttribute("style", s.getAttribute("style") + ";" + style);
+        container.appendChild(s);
+        return s;
+      },
+    };
   }
 
-  const f2 = (n) => Math.round(n * 100) / 100;
-
   /* ---------------- wisteria ---------------- */
-  let racemeIndex = 0;
-  function wisteriaRaceme(rand, x, y, len, scale) {
-    const outer = el("g", { transform: `translate(${f2(x)} ${f2(y)}) scale(${f2(scale)})` });
-    const g = el("g", { class: "sway", style: `--i:${racemeIndex++ % 9};--d:${f2(4.2 + rand() * 2.4)}s` });
-    outer.appendChild(g);
-    // stem
-    g.appendChild(el("path", { d: `M0 0 q ${f2(rand() * 4 - 2)} ${f2(len * 0.5)} ${f2(rand() * 3 - 1.5)} ${f2(len * 0.96)}`, fill: "none", stroke: "#5f4a6e", "stroke-width": "1.1", "stroke-linecap": "round" }));
-    // leaflets at the top
-    g.appendChild(el("path", { d: "M-1 3c-5-2-10 0-12 5 4 2 9 0 12-5zM1 3c5-2 10 0 12 5-4 2-9 0-12-5z", fill: "url(#g-leaf)", stroke: "#3f5238", "stroke-width": ".4", "stroke-opacity": ".6" }));
+  function racemeContent(rand, len, scale) {
+    const g = el("g", { filter: "url(#f-raise)" }, [el("g", { transform: `scale(${f2(scale)})` })]);
+    const inner = g.firstChild;
+    inner.appendChild(el("path", { d: `M0 0 q ${f2(rand() * 4 - 2)} ${f2(len * 0.5)} ${f2(rand() * 3 - 1.5)} ${f2(len * 0.96)}`, fill: "none", stroke: "#5f4a6e", "stroke-width": "1.1", "stroke-linecap": "round" }));
+    inner.appendChild(el("path", { d: "M-1 3c-5-2-10 0-12 5 4 2 9 0 12-5zM1 3c5-2 10 0 12 5-4 2-9 0-12-5z", fill: "url(#g-leaf)", stroke: "#3f5238", "stroke-width": ".4", "stroke-opacity": ".6" }));
     const buds = el("g", { fill: "url(#g-wist-bud)", stroke: "#4d3663", "stroke-opacity": ".45", "stroke-width": ".35" });
     const rows = Math.max(5, Math.round(len / 5));
     for (let r = 0; r < rows; r++) {
@@ -62,48 +87,53 @@
         buds.appendChild(el("ellipse", { cx: f2(cx), cy: f2(jy), rx: f2(rx + rand() * 0.5), ry: f2(ry + rand() * 0.3), transform: `rotate(${f2(rand() * 30 - 15)} ${f2(cx)} ${f2(jy)})` }));
       }
     }
-    g.appendChild(buds);
-    // satin highlight on the buds
+    inner.appendChild(buds);
     const hl = buds.cloneNode(true);
     hl.setAttribute("fill", "url(#p-stitch)");
     hl.setAttribute("stroke", "none");
-    g.appendChild(hl);
-    return outer;
+    inner.appendChild(hl);
+    return g;
+  }
+
+  let racemeIndex = 0;
+  function addRaceme(comp, rand, x, y, len, scale) {
+    const w = 30 * scale, h = (len + 8) * scale;
+    const svg = comp.piece({ x: x - w / 2, y: y - 2 * scale, w, h }, "sway", `--i:${racemeIndex++ % 9};--d:${f2(4.2 + rand() * 2.4)}s`);
+    // local coordinates: shift so (0,0) of the raceme sits at the top centre of the box
+    svg.setAttribute("viewBox", `${f2(-w / 2)} ${f2(-2 * scale)} ${f2(w)} ${f2(h)}`);
+    svg.appendChild(racemeContent(rand, len, scale));
+    return svg;
   }
 
   function wisteriaCanopy(container, opts) {
     const o = Object.assign({ width: 400, height: 150, clusters: 9, seed: 11, vine: true, minLen: 50, maxLen: 110 }, opts || {});
     const rand = rng(o.seed);
-    const svg = svgRoot(o.width, o.height);
-    const root = el("g", { filter: "url(#f-raise)" });
+    const comp = composition(container, o.width, o.height);
     if (o.vine) {
+      const root = el("g", { filter: "url(#f-raise)" });
       root.appendChild(el("path", { d: `M-4 10 C ${o.width * 0.25} 2 ${o.width * 0.75} 18 ${o.width + 4} 8`, fill: "none", stroke: "#5f4a6e", "stroke-width": "1.8", "stroke-linecap": "round" }));
       root.appendChild(el("path", { d: `M-4 14 C ${o.width * 0.3} 6 ${o.width * 0.7} 22 ${o.width + 4} 12`, fill: "none", stroke: "#7a6488", "stroke-width": "1", "stroke-linecap": "round", opacity: ".7" }));
-      // leaves along the vine
       for (let i = 0; i < Math.round(o.width / 34); i++) {
         const x = 10 + i * 34 + rand() * 10;
         const y = 8 + Math.sin(i) * 3;
         const rot = -40 + rand() * 80 + (i % 2 ? 160 : 0);
         root.appendChild(el("use", { href: "#s-leaf", x: f2(x - 11), y: f2(y - 7), width: 22, height: 14, transform: `rotate(${f2(rot)} ${f2(x)} ${f2(y)})` }));
       }
+      comp.base.appendChild(root);
     }
     for (let i = 0; i < o.clusters; i++) {
       const x = (i + 0.5) * (o.width / o.clusters) + (rand() * 20 - 10);
       const len = o.minLen + rand() * (o.maxLen - o.minLen) * (i % 2 ? 1 : 0.75);
       const scale = 0.9 + rand() * 0.35;
-      root.appendChild(wisteriaRaceme(rand, x, 10 + rand() * 6, len, scale));
+      addRaceme(comp, rand, x, 10 + rand() * 6, len, scale);
     }
-    svg.appendChild(root);
-    container.replaceChildren(svg);
   }
 
   /* ---------------- roses ---------------- */
   const ROSES = ["#s-rose-pink", "#s-rose-wine", "#s-rose-cream", "#s-rose-pink"];
 
-  let bloomIndex = 0;
-  function roseCluster(rand, cx, cy, size, variant) {
-    const g = el("g", { class: "bloom", style: `--i:${bloomIndex++ % 12}` });
-    // leaves fanning out behind
+  function clusterContent(rand, cx, cy, size, variant) {
+    const g = el("g");
     const leaves = 2 + Math.floor(rand() * 2);
     for (let i = 0; i < leaves; i++) {
       const a = -150 + i * (120 / leaves) + rand() * 40;
@@ -114,42 +144,47 @@
     return g;
   }
 
+  let bloomIndex = 0;
+  function addCluster(comp, rand, cx, cy, size, variant) {
+    const R = size * 0.95;
+    const svg = comp.piece({ x: cx - R, y: cy - R, w: 2 * R, h: 2 * R }, "bloom", `--i:${bloomIndex++ % 12}`);
+    svg.appendChild(clusterContent(rand, cx, cy, size, variant));
+    return svg;
+  }
+
   function roseBorder(container, opts) {
     const o = Object.assign({ width: 400, height: 76, count: 9, seed: 23 }, opts || {});
     const rand = rng(o.seed);
-    const svg = svgRoot(o.width, o.height);
-    const root = el("g");
-    // trailing stem through the border
-    root.appendChild(el("path", { d: `M-4 ${o.height * 0.55} C ${o.width * 0.2} ${o.height * 0.3} ${o.width * 0.5} ${o.height * 0.8} ${o.width + 4} ${o.height * 0.5}`, fill: "none", stroke: "#5c7052", "stroke-width": "1.6", "stroke-linecap": "round" }));
-    // back row (smaller, cream/pink), front row larger
+    const comp = composition(container, o.width, o.height);
+    const base = el("g", { filter: "url(#f-raise)" });
+    base.appendChild(el("path", { d: `M-4 ${o.height * 0.55} C ${o.width * 0.2} ${o.height * 0.3} ${o.width * 0.5} ${o.height * 0.8} ${o.width + 4} ${o.height * 0.5}`, fill: "none", stroke: "#5c7052", "stroke-width": "1.6", "stroke-linecap": "round" }));
+    const pearls = el("g", { fill: "url(#g-pearl)", stroke: "#9c8088", "stroke-width": ".3" });
+    for (let i = 0; i < o.count * 2; i++) pearls.appendChild(el("circle", { cx: f2(rand() * o.width), cy: f2(o.height * 0.3 + rand() * o.height * 0.5), r: f2(1.6 + rand() * 1.2) }));
+    base.appendChild(pearls);
+    comp.base.appendChild(base);
     for (let i = 0; i < o.count + 1; i++) {
       const cx = i * (o.width / o.count) + rand() * 10 - 5;
       const cy = o.height * 0.36 + rand() * 8;
-      root.appendChild(roseCluster(rand, cx, cy, 26 + rand() * 8, ROSES[(i + 2) % ROSES.length]));
+      addCluster(comp, rand, cx, cy, 26 + rand() * 8, ROSES[(i + 2) % ROSES.length]);
     }
     for (let i = 0; i < o.count; i++) {
       const cx = (i + 0.5) * (o.width / o.count) + rand() * 8 - 4;
       const cy = o.height * 0.6 + rand() * 8;
-      root.appendChild(roseCluster(rand, cx, cy, 34 + rand() * 12, ROSES[i % ROSES.length]));
+      addCluster(comp, rand, cx, cy, 34 + rand() * 12, ROSES[i % ROSES.length]);
     }
-    // a few pearls scattered between blooms
-    const pearls = el("g", { fill: "url(#g-pearl)", stroke: "#9c8088", "stroke-width": ".3" });
-    for (let i = 0; i < o.count * 2; i++) pearls.appendChild(el("circle", { cx: f2(rand() * o.width), cy: f2(o.height * 0.3 + rand() * o.height * 0.5), r: f2(1.6 + rand() * 1.2) }));
-    root.appendChild(pearls);
-    svg.appendChild(root);
-    container.replaceChildren(svg);
   }
 
+  /* A static column (used where the container height is set by the layout) */
   function roseColumn(container, opts) {
     const o = Object.assign({ width: 40, height: 300, count: 5, seed: 41 }, opts || {});
     const rand = rng(o.seed);
-    const svg = svgRoot(o.width, o.height, { preserveAspectRatio: "xMidYMid meet" });
+    const svg = el("svg", { viewBox: `0 0 ${o.width} ${o.height}`, preserveAspectRatio: "xMidYMid meet", "aria-hidden": "true", focusable: "false" });
     const root = el("g");
     root.appendChild(el("path", { d: `M${o.width * 0.5} -4 C ${o.width * 0.1} ${o.height * 0.25} ${o.width * 0.9} ${o.height * 0.6} ${o.width * 0.5} ${o.height + 4}`, fill: "none", stroke: "#5c7052", "stroke-width": "1.4", "stroke-linecap": "round" }));
     for (let i = 0; i < o.count; i++) {
       const cy = (i + 0.5) * (o.height / o.count) + rand() * 10 - 5;
       const cx = o.width * 0.5 + (i % 2 ? 6 : -6);
-      root.appendChild(roseCluster(rand, cx, cy, 22 + rand() * 8, ROSES[(i * 2 + 1) % ROSES.length]));
+      root.appendChild(clusterContent(rand, cx, cy, 22 + rand() * 8, ROSES[(i * 2 + 1) % ROSES.length]));
     }
     svg.appendChild(root);
     container.replaceChildren(svg);
@@ -159,45 +194,41 @@
   function floralArch(container, opts) {
     const o = Object.assign({ width: 420, height: 360, seed: 77 }, opts || {});
     const rand = rng(o.seed);
-    const svg = svgRoot(o.width, o.height);
-    const root = el("g");
+    const comp = composition(container, o.width, o.height);
     const cx = o.width / 2, r = o.width * 0.38, baseY = o.height - 8, topY = r + 24;
-    // the arch itself: stitched double line
+    const base = el("g", { filter: "url(#f-raise)" });
     const arch = `M${cx - r} ${baseY} V${topY} A${r} ${r} 0 0 1 ${cx + r} ${topY} V${baseY}`;
-    root.appendChild(el("path", { d: arch, fill: "none", stroke: "#5c7052", "stroke-width": "2.2", "stroke-linecap": "round" }));
-    root.appendChild(el("path", { d: arch, fill: "none", stroke: "#b3bf9e", "stroke-width": ".9", "stroke-dasharray": "3 3", transform: "translate(0 -3)" }));
-    // leaves and roses along the curve + a little way down the legs
+    base.appendChild(el("path", { d: arch, fill: "none", stroke: "#5c7052", "stroke-width": "2.2", "stroke-linecap": "round" }));
+    base.appendChild(el("path", { d: arch, fill: "none", stroke: "#b3bf9e", "stroke-width": ".9", "stroke-dasharray": "3 3", transform: "translate(0 -3)" }));
     const steps = 22;
+    const roseSpots = [];
     for (let i = 0; i <= steps; i++) {
-      const a = Math.PI + (i / steps) * Math.PI; // left to right over the top
+      const a = Math.PI + (i / steps) * Math.PI;
       const px = cx + r * Math.cos(a), py = topY + r * Math.sin(a);
       const deg = (a * 180) / Math.PI + 90;
       const lw = 20 + rand() * 8;
-      root.appendChild(el("use", { href: "#s-leaf", x: f2(px), y: f2(py - lw * 0.33), width: f2(lw), height: f2(lw * 0.66), transform: `rotate(${f2(deg - 30 + rand() * 20)} ${f2(px)} ${f2(py)})` }));
-      root.appendChild(el("use", { href: "#s-leaf", x: f2(px), y: f2(py - lw * 0.33), width: f2(lw), height: f2(lw * 0.66), transform: `rotate(${f2(deg + 150 + rand() * 20)} ${f2(px)} ${f2(py)})` }));
-      if (i % 2 === 0) {
-        const size = 24 + rand() * 14;
-        const b = el("g", { class: "bloom", style: `--i:${bloomIndex++ % 12}` });
-        b.appendChild(el("use", { href: ROSES[i % ROSES.length], x: f2(px - size / 2), y: f2(py - size / 2), width: f2(size), height: f2(size), transform: `rotate(${f2(rand() * 60)} ${f2(px)} ${f2(py)})` }));
-        root.appendChild(b);
-      }
+      base.appendChild(el("use", { href: "#s-leaf", x: f2(px), y: f2(py - lw * 0.33), width: f2(lw), height: f2(lw * 0.66), transform: `rotate(${f2(deg - 30 + rand() * 20)} ${f2(px)} ${f2(py)})` }));
+      base.appendChild(el("use", { href: "#s-leaf", x: f2(px), y: f2(py - lw * 0.33), width: f2(lw), height: f2(lw * 0.66), transform: `rotate(${f2(deg + 150 + rand() * 20)} ${f2(px)} ${f2(py)})` }));
+      if (i % 2 === 0) roseSpots.push({ px, py, size: 24 + rand() * 14, v: ROSES[i % ROSES.length], rot: rand() * 60 });
     }
-    // roses climbing the legs
+    comp.base.appendChild(base);
+    roseSpots.forEach((s) => {
+      const R = s.size * 0.6;
+      const svg = comp.piece({ x: s.px - R, y: s.py - R, w: 2 * R, h: 2 * R }, "bloom", `--i:${bloomIndex++ % 12}`);
+      svg.appendChild(el("use", { href: s.v, x: f2(s.px - s.size / 2), y: f2(s.py - s.size / 2), width: f2(s.size), height: f2(s.size), transform: `rotate(${f2(s.rot)} ${f2(s.px)} ${f2(s.py)})` }));
+    });
     for (let side = -1; side <= 1; side += 2) {
       for (let j = 0; j < 4; j++) {
         const py = topY + 30 + j * 50 + rand() * 10;
         const px = cx + side * r + (j % 2 ? side * 8 : -side * 6);
-        root.appendChild(roseCluster(rand, px, py, 22 + rand() * 12, ROSES[(j + (side > 0 ? 1 : 0)) % ROSES.length]));
+        addCluster(comp, rand, px, py, 22 + rand() * 12, ROSES[(j + (side > 0 ? 1 : 0)) % ROSES.length]);
       }
     }
-    // wisteria hanging from the crown of the arch
     for (let k = -2; k <= 2; k++) {
       const a = -Math.PI / 2 + k * 0.24;
       const px = cx + (r - 6) * Math.cos(a), py = topY + (r - 6) * Math.sin(a);
-      root.appendChild(wisteriaRaceme(rand, px, py, 50 + (2 - Math.abs(k)) * 16 + rand() * 10, 0.95));
+      addRaceme(comp, rand, px, py, 50 + (2 - Math.abs(k)) * 16 + rand() * 10, 0.95);
     }
-    svg.appendChild(root);
-    container.replaceChildren(svg);
   }
 
   window.Embroidery = { wisteriaCanopy, roseBorder, roseColumn, floralArch };

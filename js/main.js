@@ -270,22 +270,6 @@
     tourStart();
   }
 
-  /* ---------------- hero parallax ---------------- */
-  function initParallax() {
-    if (reduceMotion) return;
-    const hero = $("#home");
-    let ticking = false;
-    window.addEventListener("scroll", () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const y = window.scrollY;
-        hero.style.setProperty("--py", y < hero.offsetHeight ? (y * 0.07).toFixed(1) + "px" : "0px");
-        ticking = false;
-      });
-    }, { passive: true });
-  }
-
   /* ---------------- scroll reveal + nav ---------------- */
   function startReveal() {
     const sections = $$(".reveal");
@@ -426,7 +410,6 @@
     countTimer = setInterval(renderCountdown, 30000);
     $("#lang-toggle").addEventListener("click", () => applyLang(lang === "en" ? "fr" : "en"));
     initRsvp();
-    initParallax();
     initEnvelope();
     if (reduceMotion) { const sp = $(".sprite"); if (sp && sp.pauseAnimations) sp.pauseAnimations(); }
     $("#lang-toggle").addEventListener("click", tourLabel);
