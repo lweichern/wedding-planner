@@ -175,21 +175,21 @@
   function initEnvelope() {
     const env = $("#envelope");
     const skip = $("#env-skip");
-    let seen = false;
-    try { seen = sessionStorage.getItem("envelopeSeen") === "1"; } catch (e) { /* ignore */ }
+    // a deep link to a section (#rsvp, #timeline) goes straight there;
+    // the home anchor or no hash plays the reveal
+    const deepLink = location.hash && location.hash !== "#home" && location.hash !== "#";
 
     const finish = () => {
       env.classList.add("gone");
       document.body.classList.remove("intro-locked");
       env.setAttribute("aria-hidden", "true");
-      try { sessionStorage.setItem("envelopeSeen", "1"); } catch (e) { /* ignore */ }
       startReveal();
       openCurtainOnce();
     };
     let curtainDone = false;
     const openCurtainOnce = () => { if (!curtainDone) { curtainDone = true; openCurtain(); } };
 
-    if (seen || reduceMotion || location.hash) {
+    if (reduceMotion || deepLink) {
       finish();
       return;
     }
@@ -206,7 +206,10 @@
       setTimeout(openCurtainOnce, 900);
       setTimeout(finish, 2950);
     };
-    const auto = setTimeout(open, (W.intro && W.intro.autoOpenAfter) || 1800);
+    let auto;
+    const armAuto = () => { auto = setTimeout(open, (W.intro && W.intro.autoOpenAfter) || 1800); };
+    if (document.readyState === "complete") armAuto();
+    else window.addEventListener("load", armAuto, { once: true });
 
     env.addEventListener("click", open);
     env.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
@@ -217,7 +220,7 @@
   /* ---------------- curtain reveal + guided tour ---------------- */
   function openCurtain() {
     const hero = $("#home");
-    if (reduceMotion || location.hash) {
+    if (reduceMotion || (location.hash && location.hash !== "#home")) {
       hero.classList.add("open");
       return;
     }

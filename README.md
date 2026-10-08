@@ -45,7 +45,7 @@ interrupted guest does not lose a long message.
 | Weak point in the reference | How this version handles it |
 | --- | --- |
 | French headings mixed with English body copy and forms | One language at a time, with an EN / FR toggle that switches every string |
-| Seven-second intro that cannot be skipped | Envelope opens on tap, Enter, or on its own after 1.8 s. A Skip button is always visible. Reduced-motion users and deep links go straight to the page, and it plays once per session |
+| Seven-second intro that cannot be skipped | Envelope opens on tap, Enter, or on its own after 1.8 s. A Skip button is always visible. Reduced-motion users and deep links to a section go straight to the page; otherwise it plays on every load |
 | Heavy raster textures that stall on mobile data | All illustrations are SVG symbols or generated in JS. Page weight is a few hundred kilobytes including fonts |
 | Thin italic body copy on pink, hard to read | Upright EB Garamond at 17.6 px, ink `#2f2128` on blush `#f4e7ea` (12.6:1 contrast). Italic is reserved for short accents |
 | Flat black RSVP button out of keeping with the design | Burgundy gradient button with a gold hairline and pearl shadow, matching the palette |
