@@ -56,3 +56,25 @@ Other details: Open in Maps links, downloadable calendar files with a
 reminder the day before, a sticky section nav after the hero, a skip link
 and focus styles for keyboard users, and all decorative SVG is hidden from
 screen readers.
+
+## Beach watercolour variant
+
+`beach/` holds a second invitation in a watercolour style for a beach wedding
+in Comporta, Portugal, with English and Portuguese copy. Open `beach/index.html`.
+It uses the same structure and the same RSVP, Maps and calendar logic, with
+its own illustrations and three ideas of its own:
+
+- **Message in a bottle.** The page opens as a corked bottle on wet sand. On
+  tap the cork pops, the bottle tips and the rolled invitation slides out and
+  unfurls into the site.
+- **A sky painted at the guest's hour.** The hero reads the local time and
+  paints dawn, midday, golden hour, dusk or a starry night, with
+  bioluminescent waves after dark. The sun/moon button cycles through them.
+- **It paints itself as you scroll.** Washes bloom in from the centre with a
+  feathered edge and headings get a brush stroke that sweeps in underneath.
+  The waves roll continuously, and the RSVP is a postcard with a stamp and
+  postmark.
+
+The watercolour look is an SVG filter (`#wc` in the sprite): a displaced
+ragged edge, soft bleed, pigment granulation and darker pooling where the
+wash dries. Washes overlap with multiply blending the way real pigment does.

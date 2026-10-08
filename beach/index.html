@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Isla &amp; Theo · 4 September 2027</title>
+  <meta name="description" content="You are invited to the wedding of Isla Moreira and Theo Lindqvist, Saturday 4 September 2027, on the sand at Praia do Carvalhal, Comporta." />
+  <meta name="theme-color" content="#fbf7ef" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23cfe7f2'/%3E%3Ccircle cx='32' cy='26' r='10' fill='%23f6c468'/%3E%3Cpath d='M4 44q8-8 16 0t16 0 16 0 8 0v20H4z' fill='%233f9aa8'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Karla:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>document.documentElement.classList.add("js"); if (window.CSS && CSS.registerProperty) document.documentElement.classList.add("masks");</script>
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to content</a>
+
+<!-- ============================================================
+     WATERCOLOUR SPRITE
+     Every illustration is vector. The "wc" filter turns flat shapes
+     into watercolour: a ragged displaced edge, soft bleed, pigment
+     granulation, and darker pooling where the wash dries at its edge.
+     Washes overlap with multiply blending the way real pigment does.
+     ============================================================ -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <filter id="wc" x="-14%" y="-14%" width="128%" height="128%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".028" numOctaves="3" seed="4" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="9" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feGaussianBlur in="rough" stdDeviation=".7" result="soft"/>
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="11" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .75 .5" result="grainA"/>
+      <feComposite in="soft" in2="grainA" operator="in" result="grained"/>
+      <feMorphology in="grained" operator="erode" radius="1.5" result="inner"/>
+      <feComposite in="grained" in2="inner" operator="out" result="band"/>
+      <feColorMatrix in="band" type="matrix" values=".7 0 0 0 0  0 .7 0 0 0  0 0 .72 0 0  0 0 0 .8 0" result="dark"/>
+      <feGaussianBlur in="dark" stdDeviation=".7" result="darkSoft"/>
+      <feComposite in="darkSoft" in2="grained" operator="over"/>
+    </filter>
+    <!-- lighter pass for big washes: ragged edge and bleed only -->
+    <filter id="wc-soft" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="3" seed="8" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="14" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feGaussianBlur in="rough" stdDeviation="1.4"/>
+    </filter>
+    <!-- pen and ink: wobble only -->
+    <filter id="ink" x="-6%" y="-6%" width="112%" height="112%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="2" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <!-- glass: soft highlight -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+
+    <linearGradient id="g-sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e3c4"/><stop offset="1" stop-color="#d9b98a"/></linearGradient>
+    <linearGradient id="g-wet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9b48d"/><stop offset="1" stop-color="#e3cfa8"/></linearGradient>
+    <linearGradient id="g-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb7c4"/><stop offset="1" stop-color="#2d7f92"/></linearGradient>
+    <radialGradient id="g-sun" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#fff3cf"/><stop offset=".6" stop-color="#f9cf7a"/><stop offset="1" stop-color="#f0a955"/></radialGradient>
+    <radialGradient id="g-moon" cx="40%" cy="35%" r="65%"><stop offset="0" stop-color="#fffdf3"/><stop offset="1" stop-color="#e5e2cf"/></radialGradient>
+    <linearGradient id="g-palm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fb08a"/><stop offset="1" stop-color="#3e7a5a"/></linearGradient>
+    <linearGradient id="g-palm2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a7c99a"/><stop offset="1" stop-color="#5f9470"/></linearGradient>
+    <linearGradient id="g-wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c7a27a"/><stop offset=".5" stop-color="#a77f58"/><stop offset="1" stop-color="#8a6443"/></linearGradient>
+    <linearGradient id="g-drift" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6d6c0"/><stop offset="1" stop-color="#b9a088"/></linearGradient>
+    <linearGradient id="g-pampas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf1e2"/><stop offset="1" stop-color="#e2c9a6"/></linearGradient>
+    <linearGradient id="g-coral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6a79a"/><stop offset="1" stop-color="#e06c66"/></linearGradient>
+    <linearGradient id="g-shell" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf1e6"/><stop offset="1" stop-color="#e8bfa6"/></linearGradient>
+    <linearGradient id="g-star" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6b58e"/><stop offset="1" stop-color="#d96f5e"/></linearGradient>
+    <linearGradient id="g-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d7f0ef" stop-opacity=".55"/><stop offset=".5" stop-color="#9fd3d4" stop-opacity=".45"/><stop offset="1" stop-color="#5da9b0" stop-opacity=".6"/></linearGradient>
+    <linearGradient id="g-paper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#efe2c8"/></linearGradient>
+    <linearGradient id="g-cork" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c79a6a"/><stop offset="1" stop-color="#8f6744"/></linearGradient>
+    <linearGradient id="g-linen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4ecdc"/><stop offset="1" stop-color="#d6c7ad"/></linearGradient>
+    <linearGradient id="g-dress" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7c9bb"/><stop offset="1" stop-color="#e9958a"/></linearGradient>
+    <linearGradient id="g-dress2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3dc"/><stop offset="1" stop-color="#6fb1a9"/></linearGradient>
+    <linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0cdb0"/><stop offset="1" stop-color="#d8a985"/></linearGradient>
+    <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5dd9a"/><stop offset="1" stop-color="#c99a44"/></linearGradient>
+    <linearGradient id="g-sunset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5b58a"/><stop offset=".55" stop-color="#f7d5a0"/><stop offset="1" stop-color="#fbeedb"/></linearGradient>
+    <linearGradient id="g-sunsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d98f7c"/><stop offset=".4" stop-color="#6f9fb0"/><stop offset="1" stop-color="#3a7d90"/></linearGradient>
+    <linearGradient id="g-pine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b9cfa0"/><stop offset="1" stop-color="#6f9a6c"/></linearGradient>
+    <linearGradient id="g-chest" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9c6b45"/><stop offset="1" stop-color="#5c3d27"/></linearGradient>
+    <linearGradient id="g-ink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b5566"/><stop offset="1" stop-color="#1f3340"/></linearGradient>
+
+    <!-- SUN & MOON -->
+    <symbol id="s-sun" viewBox="0 0 120 120">
+      <g filter="url(#wc)">
+        <circle cx="60" cy="60" r="34" fill="url(#g-sun)"/>
+      </g>
+      <circle cx="60" cy="60" r="44" fill="#f9cf7a" opacity=".22" filter="url(#glow)"/>
+    </symbol>
+    <symbol id="s-moon" viewBox="0 0 120 120">
+      <g filter="url(#wc)">
+        <path d="M70 22a40 40 0 1 0 0 76a30 30 0 1 1 0-76z" fill="url(#g-moon)"/>
+      </g>
+      <circle cx="56" cy="60" r="44" fill="#f4f1dc" opacity=".16" filter="url(#glow)"/>
+    </symbol>
+
+    <!-- CLOUD -->
+    <symbol id="s-cloud" viewBox="0 0 200 80">
+      <g filter="url(#wc-soft)" fill="#fff" opacity=".85">
+        <ellipse cx="60" cy="50" rx="52" ry="20"/><ellipse cx="110" cy="40" rx="48" ry="26"/><ellipse cx="150" cy="54" rx="40" ry="16"/>
+      </g>
+    </symbol>
+
+    <!-- PALM TREE -->
+    <symbol id="s-palm" viewBox="0 0 160 240">
+      <g filter="url(#wc)">
+        <path d="M78 236c-6-60-10-120 8-176c4-12 10-20 14-24l8 6c-8 10-14 24-16 44c-4 50 0 100 4 150z" fill="url(#g-wood)"/>
+        <path d="M84 96c-30-18-62-14-78 2c22 4 46 8 74 10zM96 90c-10-34-38-56-70-54c14 16 34 32 66 60zM102 92c6-34 28-58 62-62c-10 20-28 40-58 66zM104 100c30-20 60-20 84-4c-24 6-52 10-82 10zM100 104c22 10 40 30 44 60c-18-14-34-30-48-54zM94 104c-24 8-44 26-52 58c20-12 38-30 56-54z" fill="url(#g-palm)"/>
+        <path d="M90 92c-8-20-30-36-56-36c12 12 30 24 54 44zM104 94c6-22 24-40 50-44c-8 16-24 30-48 50zM100 100c20 4 38 18 46 42c-16-10-30-24-46-40zM92 100c-18 6-34 20-40 42c14-10 28-22 42-40z" fill="url(#g-palm2)" style="mix-blend-mode:multiply" opacity=".75"/>
+        <g fill="#8a6443"><circle cx="94" cy="104" r="5"/><circle cx="102" cy="108" r="4.5"/><circle cx="97" cy="112" r="4"/></g>
+      </g>
+    </symbol>
+
+    <!-- DRIFTWOOD ARCH WITH PAMPAS -->
+    <symbol id="s-arch" viewBox="0 0 260 220">
+      <g filter="url(#wc)">
+        <path d="M40 216c-4-60-2-120 6-180l12 2c-6 60-8 120-6 178zM206 216c4-60 2-120-6-180l-12 2c6 60 8 120 6 178z" fill="url(#g-drift)"/>
+        <path d="M44 38c30-12 60-16 86-16s56 4 86 16l-2 10c-30-10-58-14-84-14s-54 4-84 14z" fill="url(#g-drift)"/>
+        <path d="M60 46c20 10 40 30 44 56c-10-10-18-22-24-34l-6 2c8 22 22 40 42 52c-24 0-50-20-56-76zM200 46c-20 10-40 30-44 56c10-10 18-22 24-34l6 2c-8 22-22 40-42 52c24 0 50-20 56-76z" fill="#f4ecdc" opacity=".7"/>
+      </g>
+      <g filter="url(#wc)">
+        <g fill="url(#g-pampas)">
+          <ellipse cx="40" cy="34" rx="12" ry="30" transform="rotate(-18 40 34)"/><ellipse cx="22" cy="54" rx="9" ry="24" transform="rotate(-40 22 54)"/><ellipse cx="60" cy="24" rx="8" ry="24" transform="rotate(8 60 24)"/>
+          <ellipse cx="220" cy="34" rx="12" ry="30" transform="rotate(18 220 34)"/><ellipse cx="238" cy="54" rx="9" ry="24" transform="rotate(40 238 54)"/><ellipse cx="200" cy="24" rx="8" ry="24" transform="rotate(-8 200 24)"/>
+        </g>
+        <g fill="url(#g-palm2)">
+          <path d="M44 60c-10 6-18 16-20 30c10-6 16-16 20-30zM216 60c10 6 18 16 20 30c-10-6-16-16-20-30z"/>
+        </g>
+        <g fill="#fff"><circle cx="52" cy="58" r="5"/><circle cx="36" cy="68" r="4"/><circle cx="62" cy="72" r="3.5"/><circle cx="208" cy="58" r="5"/><circle cx="224" cy="68" r="4"/><circle cx="198" cy="72" r="3.5"/></g>
+        <g fill="url(#g-coral)"><circle cx="44" cy="76" r="3"/><circle cx="216" cy="76" r="3"/><circle cx="58" cy="64" r="2.4"/><circle cx="202" cy="64" r="2.4"/></g>
+      </g>
+      <g fill="none" stroke="#8a6443" stroke-width="1.2" stroke-linecap="round" filter="url(#ink)" opacity=".7">
+        <path d="M48 70v120M212 70v120M56 42c30-8 58-10 74-10s44 2 74 10"/>
+      </g>
+    </symbol>
+
+    <!-- SHELLS -->
+    <symbol id="s-shell" viewBox="0 0 60 60">
+      <g filter="url(#wc)">
+        <path d="M30 54C12 50 4 36 8 22c6 4 12 8 22 8s16-4 22-8c4 14-4 28-22 32z" fill="url(#g-shell)"/>
+        <path d="M30 54L14 26M30 54L24 24M30 54L36 24M30 54L46 26" stroke="#c99a7e" stroke-width="1.2" fill="none"/>
+        <path d="M22 8h16l4 6H18z" fill="#e8bfa6"/>
+      </g>
+    </symbol>
+    <symbol id="s-spiral" viewBox="0 0 60 60">
+      <g filter="url(#wc)">
+        <path d="M10 42c0-18 14-30 30-30c12 0 18 10 14 18c-4 6-14 4-14-2c0-4 6-4 6 0" fill="url(#g-shell)" stroke="#c99a7e" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M10 42c6 8 16 12 26 10c10-2 16-10 18-16" fill="#f4d8c6" stroke="#c99a7e" stroke-width="1.2"/>
+      </g>
+    </symbol>
+    <symbol id="s-starfish" viewBox="0 0 60 60">
+      <g filter="url(#wc)">
+        <path d="M30 4l7 18l19 1l-15 12l5 19l-16-11l-16 11l5-19L4 23l19-1z" fill="url(#g-star)"/>
+        <g fill="#fff" opacity=".6"><circle cx="30" cy="14" r="1.5"/><circle cx="30" cy="22" r="1.5"/><circle cx="40" cy="26" r="1.5"/><circle cx="20" cy="26" r="1.5"/><circle cx="36" cy="38" r="1.5"/><circle cx="24" cy="38" r="1.5"/><circle cx="30" cy="30" r="2"/></g>
+      </g>
+    </symbol>
+    <symbol id="s-coral" viewBox="0 0 160 140">
+      <g filter="url(#wc)" fill="url(#g-coral)">
+        <path d="M80 136c-2-30-6-56-18-76c-8-14-22-22-38-26c6 10 12 18 14 30c-10-6-20-8-32-6c14 6 24 14 30 28c-6 0-12 2-16 6c14 2 24 8 30 18c-2-2-8-2-12 0c10 4 18 10 24 20z"/>
+        <path d="M80 136c2-30 6-56 18-76c8-14 22-22 38-26c-6 10-12 18-14 30c10-6 20-8 32-6c-14 6-24 14-30 28c6 0 12 2 16 6c-14 2-24 8-30 18c2-2 8-2 12 0c-10 4-18 10-24 20z"/>
+        <path d="M80 136c0-40 2-70 0-100c-2-14-6-24-12-32c12 4 18 14 20 28c2-14 8-24 18-30c-6 10-10 22-10 36c0 30-2 60-4 98z" opacity=".9"/>
+      </g>
+    </symbol>
+
+    <!-- PAPER BOAT & BEACH CHAIR -->
+    <symbol id="s-boat" viewBox="0 0 80 60">
+      <g filter="url(#wc)">
+        <path d="M4 36h72l-14 18H18z" fill="url(#g-paper)" stroke="#c9b89a" stroke-width="1"/>
+        <path d="M40 8l-18 28h36z" fill="#fff" stroke="#c9b89a" stroke-width="1"/>
+        <path d="M40 8l-8 28h16z" fill="#efe2c8"/>
+      </g>
+    </symbol>
+    <symbol id="s-chair" viewBox="0 0 100 110">
+      <g filter="url(#wc)">
+        <path d="M22 14l10 60h46l10-60z" fill="#fff"/>
+        <path d="M30 14l2 12h44l2-12zM34 38l2 12h36l2-12zM38 62l2 12h28l2-12z" fill="url(#g-coral)" opacity=".85"/>
+        <path d="M22 74h60l10 24H12z" fill="#fff"/>
+        <path d="M30 74l-6 12h52l-6-12z" fill="url(#g-coral)" opacity=".85"/>
+      </g>
+      <g fill="none" stroke="#8a6443" stroke-width="2.4" stroke-linecap="round" filter="url(#ink)">
+        <path d="M18 100V60l10-46M82 100V60L72 14M12 98h76M20 76h60"/>
+      </g>
+    </symbol>
+
+    <!-- FIGURES -->
+    <g id="b-head"><circle cx="0" cy="-54" r="7.5" fill="url(#g-skin)"/><path d="M-2.5-47h5v5h-5z" fill="url(#g-skin)"/></g>
+    <symbol id="s-him" viewBox="-22 -66 44 112">
+      <g filter="url(#wc)">
+        <use href="#b-head"/>
+        <path d="M-8-59c0-8 16-8 16 0c0 2-1 3-2 3c-1-4-11-4-12 0c-1 0-2-1-2-3z" fill="#4a3528"/>
+        <path d="M-11-42h22l2 36H-13z" fill="url(#g-linen)"/>
+        <path d="M-4-42h8l-4 20z" fill="#fff"/>
+        <path d="M-11-42l7 12l4-12zM11-42l-7 12l-4-12z" fill="#e3d6bd"/>
+        <path d="M-10-6h9v46h-9zM1-6h9v46H1z" fill="url(#g-linen)"/>
+        <path d="M-11-40c-6 6-8 16-6 26M11-40c6 6 8 16 6 26" fill="none" stroke="url(#g-linen)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="-16" cy="-12" r="2.6" fill="url(#g-skin)"/><circle cx="16" cy="-12" r="2.6" fill="url(#g-skin)"/>
+        <path d="M-10 40h9v4h-9zM1 40h9v4H1z" fill="url(#g-skin)"/>
+        <path d="M-9 43h7M2 43h7" stroke="#8a6443" stroke-width="1.5"/>
+        <path d="M-2-40l-1.5 4M2-40l1.5 4" stroke="#8a6443" stroke-width="1"/>
+      </g>
+    </symbol>
+    <symbol id="s-her" viewBox="-28 -66 56 112">
+      <g filter="url(#wc)">
+        <use href="#b-head"/>
+        <path d="M-8-58c0-9 16-9 16 0c0 3-1 4-2 4c0-5-12-5-12 0c-1 0-2-1-2-4z" fill="#5a3a26"/>
+        <path d="M-7-54c-2 8-2 16 0 22M7-54c2 8 2 16 0 22" fill="none" stroke="#5a3a26" stroke-width="3" stroke-linecap="round"/>
+        <path d="M-8-42h16l2 14H-10z" fill="url(#g-dress)"/>
+        <path d="M-10-28h20c6 24 10 44 14 70H-24c4-26 8-46 14-70z" fill="url(#g-dress)"/>
+        <path d="M-6-28c-2 24-4 46-6 70M6-28c2 24 4 46 6 70M0-26v68" fill="none" stroke="#c96f66" stroke-width=".8" opacity=".5"/>
+        <path d="M-9-40c-5 6-7 14-7 24M9-40c5 6 7 14 7 24" fill="none" stroke="url(#g-skin)" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M-6-44c2 2 10 2 12 0" fill="none" stroke="#fff" stroke-width="1.4"/>
+        <g fill="#fff"><circle cx="-12" cy="-58" r="2.4"/><circle cx="-14" cy="-54" r="1.8"/></g>
+      </g>
+    </symbol>
+    <symbol id="s-basket" viewBox="0 0 120 90">
+      <g filter="url(#wc)">
+        <path d="M14 40h92l-10 44H24z" fill="url(#g-wood)"/>
+        <path d="M18 48h84M20 58h80M22 68h76M24 78h72" stroke="#6f4f36" stroke-width="1.2" opacity=".6"/>
+        <path d="M30 40c0-20 60-20 60 0" fill="none" stroke="#8a6443" stroke-width="3" stroke-linecap="round"/>
+        <g>
+          <path d="M26 42c-2-10 6-18 14-18s14 8 12 18z" fill="#f08a7e"/><path d="M34 26l4 10M40 24l-2 12" stroke="#fff" stroke-width="1.4"/>
+          <path d="M48 40c-2-10 6-18 14-18s14 8 12 18z" fill="#6fb1a9"/><path d="M56 24l4 10M62 22l-2 12" stroke="#fff" stroke-width="1.4"/>
+          <path d="M70 42c-2-10 6-18 14-18s14 8 12 18z" fill="#f6c468"/><path d="M78 26l4 10M84 24l-2 12" stroke="#fff" stroke-width="1.4"/>
+        </g>
+      </g>
+    </symbol>
+
+    <!-- TIMELINE ICONS -->
+    <symbol id="i-shell" viewBox="0 0 48 48"><use href="#s-shell" x="0" y="0" width="48" height="48"/></symbol>
+    <symbol id="i-rings" viewBox="0 0 48 48">
+      <g filter="url(#wc)" fill="none" stroke="url(#g-gold)" stroke-width="3.4"><circle cx="19" cy="27" r="10"/><circle cx="30" cy="22" r="10"/></g>
+    </symbol>
+    <symbol id="i-coconut" viewBox="0 0 48 48">
+      <g filter="url(#wc)">
+        <circle cx="24" cy="28" r="15" fill="#8a6443"/><ellipse cx="24" cy="26" rx="11" ry="9" fill="#fff8ec"/>
+        <path d="M26 24L36 6" stroke="#f08a7e" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M14 20c-6-8-6-16 0-20c2 8 4 14 8 18z" fill="url(#g-palm)"/>
+      </g>
+    </symbol>
+    <symbol id="i-lantern" viewBox="0 0 48 48">
+      <g filter="url(#wc)">
+        <path d="M24 4v6" stroke="#8a6443" stroke-width="2"/>
+        <path d="M14 10h20l4 26H10z" fill="#f6c468"/>
+        <path d="M18 10l-4 26M30 10l4 26M12 22h24" stroke="#d9963a" stroke-width="1" opacity=".7"/>
+        <path d="M10 36h28v4H10z" fill="#8a6443"/>
+      </g>
+      <circle cx="24" cy="24" r="14" fill="#f6c468" opacity=".3" filter="url(#glow)"/>
+    </symbol>
+    <symbol id="i-sparkler" viewBox="0 0 48 48">
+      <g filter="url(#wc)">
+        <path d="M24 44V22" stroke="#8a6443" stroke-width="2.4" stroke-linecap="round"/>
+        <g stroke="url(#g-gold)" stroke-width="2" stroke-linecap="round" fill="none">
+          <path d="M24 20V6M24 20l10-10M24 20L14 10M24 20h14M24 20H10M24 20l9 9M24 20l-9 9"/>
+        </g>
+        <g fill="#f6c468"><circle cx="24" cy="4" r="1.6"/><circle cx="36" cy="8" r="1.6"/><circle cx="12" cy="8" r="1.6"/><circle cx="40" cy="20" r="1.6"/><circle cx="8" cy="20" r="1.6"/></g>
+      </g>
+    </symbol>
+
+    <!-- SURF, PINEAPPLE, UMBRELLA -->
+    <symbol id="s-surf" viewBox="0 0 80 240">
+      <g filter="url(#wc)">
+        <path d="M40 6c22 40 30 110 20 190c-4 20-14 36-20 40c-6-4-16-20-20-40C10 116 18 46 40 6z" fill="#fff"/>
+        <path d="M40 6c14 40 22 110 14 190c-2 14-8 28-14 36c-6-8-12-22-14-36C18 116 26 46 40 6z" fill="url(#g-dress2)" opacity=".9"/>
+        <path d="M40 30v190" stroke="#8a6443" stroke-width="1.5"/>
+        <path d="M26 120c10-6 18-6 28 0" fill="none" stroke="#f08a7e" stroke-width="3"/>
+      </g>
+    </symbol>
+    <symbol id="s-pineapple" viewBox="0 0 90 140">
+      <g filter="url(#wc)">
+        <path d="M45 50c-14 0-26 8-26 30c0 24 10 54 26 56c16-2 26-32 26-56c0-22-12-30-26-30z" fill="#f6c468"/>
+        <path d="M24 78l42 28M22 96l40 28M28 62l40 26M36 54l34 22M62 60l-34 42M70 74l-40 46M58 50l-34 34" stroke="#d9963a" stroke-width="1.2" opacity=".7"/>
+        <path d="M45 52c-10-12-14-26-10-44c8 8 12 18 14 30c2-12 6-22 14-30c4 18 0 32-10 44c-4 4-6 4-8 0z" fill="url(#g-palm)"/>
+        <path d="M40 48c-14-6-22-12-28-24c12 2 20 8 28 22zM50 48c14-6 22-12 28-24c-12 2-20 8-28 22z" fill="url(#g-palm2)"/>
+      </g>
+    </symbol>
+    <symbol id="s-umbrella" viewBox="0 0 160 200">
+      <g filter="url(#wc)">
+        <path d="M80 10C34 10 10 44 8 80c20-10 36-10 48 0c10-10 30-10 48 0c10-10 28-10 48 0C150 44 126 10 80 10z" fill="#f08a7e"/>
+        <path d="M58 12c-8 20-10 44-6 68M102 12c8 20 10 44 6 68" fill="none" stroke="#fff" stroke-width="10" opacity=".8"/>
+        <path d="M80 10c-16 20-20 44-18 70M80 10c16 20 20 44 18 70" fill="none" stroke="#c96f66" stroke-width="1" opacity=".5"/>
+      </g>
+      <path d="M80 80v114" stroke="#8a6443" stroke-width="3" stroke-linecap="round" filter="url(#ink)"/>
+    </symbol>
+
+    <!-- TREASURE CHEST -->
+    <symbol id="s-chest" viewBox="0 0 220 160">
+      <g filter="url(#wc)">
+        <path d="M30 70h160v60H30z" fill="url(#g-chest)"/>
+        <path d="M30 70c0-26 36-40 80-40s80 14 80 40z" fill="url(#g-chest)" transform="translate(0 -12) rotate(-8 110 70)"/>
+        <path d="M30 70c0-26 36-40 80-40s80 14 80 40z" fill="#3b2617" opacity=".5" transform="translate(0 -12) rotate(-8 110 70)"/>
+        <path d="M60 70h100v60H60z" fill="none" stroke="url(#g-gold)" stroke-width="5"/>
+        <path d="M30 100h160" stroke="url(#g-gold)" stroke-width="4"/>
+        <path d="M100 96h20v18h-20z" fill="url(#g-gold)"/>
+        <g fill="url(#g-gold)">
+          <circle cx="70" cy="64" r="6"/><circle cx="90" cy="58" r="7"/><circle cx="112" cy="54" r="7"/><circle cx="134" cy="58" r="7"/><circle cx="154" cy="64" r="6"/><circle cx="100" cy="68" r="6"/><circle cx="124" cy="68" r="6"/>
+        </g>
+        <g fill="#fff"><circle cx="80" cy="68" r="3"/><circle cx="144" cy="68" r="3"/><circle cx="112" cy="64" r="3"/></g>
+        <path d="M0 150c40-16 80-20 110-14s70 10 110 2v8H0z" fill="url(#g-sand)"/>
+      </g>
+      <use href="#s-starfish" x="170" y="118" width="34" height="34"/>
+      <use href="#s-shell" x="14" y="124" width="26" height="26"/>
+    </symbol>
+
+    <!-- LIGHTHOUSE -->
+    <symbol id="s-lighthouse" viewBox="0 0 200 240">
+      <g filter="url(#wc)">
+        <path d="M0 236c30-30 60-40 100-40s70 10 100 40z" fill="url(#g-sand)"/>
+        <path d="M70 200l12-120h36l12 120z" fill="#fff"/>
+        <path d="M80 130l-2 18h44l-2-18zM76 166l-2 18h52l-2-18z" fill="#f08a7e"/>
+        <path d="M78 80h44v-8H78z" fill="#8a6443"/>
+        <path d="M84 72h32v-22H84z" fill="#f6c468"/>
+        <path d="M80 50h40l-20-16z" fill="#8a6443"/>
+        <path d="M96 170h8v30h-8z" fill="#3b5566"/>
+      </g>
+      <path d="M84 60L-20 20v80z" fill="#f6c468" opacity=".25" filter="url(#glow)"/>
+      <path d="M116 60l104-40v80z" fill="#f6c468" opacity=".25" filter="url(#glow)"/>
+    </symbol>
+
+    <!-- POSTAGE STAMP -->
+    <symbol id="s-stamp" viewBox="0 0 100 120">
+      <rect x="4" y="4" width="92" height="112" fill="#fff" stroke="#c9b89a" stroke-width="1" stroke-dasharray="3 3"/>
+      <rect x="12" y="12" width="76" height="96" fill="#cfe7f2"/>
+      <g filter="url(#wc)">
+        <circle cx="50" cy="44" r="16" fill="url(#g-sun)"/>
+        <path d="M12 70q10-8 20 0t20 0 20 0 16 0v38H12z" fill="url(#g-sea)"/>
+        <path d="M12 94q10-6 20 0t20 0 20 0 16 0v14H12z" fill="url(#g-sand)"/>
+      </g>
+      <text x="50" y="104" text-anchor="middle" font-family="Karla, sans-serif" font-size="8" letter-spacing="2" fill="#1f3340">COMPORTA</text>
+    </symbol>
+
+    <!-- BRUSH STROKE behind headings -->
+    <symbol id="s-brush" viewBox="0 0 300 40" preserveAspectRatio="none">
+      <g filter="url(#wc-soft)">
+        <path d="M6 22c40-10 90-14 140-12s100 6 148 2c-10 12-40 18-90 18S60 32 6 22z" fill="currentColor"/>
+      </g>
+    </symbol>
+
+    <!-- PALM FROND for frames -->
+    <symbol id="s-frond" viewBox="0 0 200 80">
+      <g filter="url(#wc)" fill="url(#g-palm)">
+        <path d="M4 40c40-30 90-36 190-32C150 20 100 40 4 40zM4 40c40 30 90 36 190 32C150 60 100 40 4 40z"/>
+        <path d="M20 40h170" stroke="#2f5f45" stroke-width="1.2" opacity=".6"/>
+      </g>
+    </symbol>
+
+    <!-- MAP of the coast -->
+    <symbol id="s-map" viewBox="0 0 320 240">
+      <g filter="url(#wc-soft)">
+        <path d="M0 0h320v240H0z" fill="#d7ecf2"/>
+        <path d="M130 0c-10 40 20 70 40 110c16 32 36 60 54 100c12 20 28 24 96 30V0z" fill="url(#g-sand)"/>
+        <path d="M150 0c-4 40 24 70 42 110c16 32 36 60 52 96c10 14 24 18 76 22V0z" fill="url(#g-pine)" opacity=".85"/>
+      </g>
+      <g filter="url(#wc)">
+        <path d="M128 0c-10 40 20 72 40 112c16 32 36 60 54 100" fill="none" stroke="#fff" stroke-width="6" opacity=".7"/>
+      </g>
+      <g fill="none" stroke="#3b5566" stroke-width="1.6" stroke-dasharray="4 4" stroke-linecap="round" filter="url(#ink)">
+        <path d="M242 36c-20 30-40 54-60 90c-10 18-14 36-12 58"/>
+      </g>
+      <g filter="url(#ink)">
+        <g fill="#3b5566"><circle cx="242" cy="36" r="4"/><circle cx="250" cy="150" r="3"/></g>
+        <path d="M170 186c0-8 6-14 14-14s14 6 14 14c0 10-14 24-14 24s-14-14-14-24z" fill="#f08a7e" stroke="#c96f66" stroke-width="1"/>
+        <circle cx="184" cy="186" r="5" fill="#fff"/>
+      </g>
+      <g fill="none" stroke="#3b5566" stroke-width="1" opacity=".8" filter="url(#ink)">
+        <circle cx="40" cy="200" r="18"/><path d="M40 178v44M18 200h44M40 182l6 18-6 18-6-18z"/>
+      </g>
+      <g fill="#fff" opacity=".8"><path d="M20 60q8-6 16 0t16 0M30 100q8-6 16 0t16 0M14 140q8-6 16 0t16 0M60 30q8-6 16 0t16 0" fill="none" stroke="#fff" stroke-width="2"/></g>
+      <text x="254" y="30" font-family="Caveat, cursive" font-size="16" fill="#1f3340" data-i18n="map.lisbon">Lisbon</text>
+      <text x="256" y="156" font-family="Caveat, cursive" font-size="15" fill="#1f3340" data-i18n="map.village">Comporta</text>
+      <text x="206" y="196" font-family="Caveat, cursive" font-size="16" font-weight="600" fill="#1f3340" data-i18n="map.beach">Carvalhal</text>
+      <text x="138" y="120" font-family="Caveat, cursive" font-size="12" fill="#3b5566" transform="rotate(-62 138 120)" data-i18n="map.shuttle">Shuttle · 1 h 20</text>
+      <text x="40" y="236" text-anchor="middle" font-family="Karla, sans-serif" font-size="7" letter-spacing="2" fill="#3b5566">N</text>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============================================================
+     MESSAGE IN A BOTTLE
+     ============================================================ -->
+<div id="envelope" class="bottle-intro" role="button" tabindex="0" aria-label="A message in a bottle. Press enter or tap to open it." data-i18n-aria="envelope.aria">
+  <div class="intro-sky" aria-hidden="true"></div>
+  <svg class="intro-sand" viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <g filter="url(#wc-soft)">
+      <path d="M-20 120c80-20 160-10 240-16s140-10 200 0v200H-20z" fill="url(#g-wet)"/>
+      <path d="M-20 170c90-24 180-14 260-20s120-6 180 0v150H-20z" fill="url(#g-sand)"/>
+    </g>
+    <g filter="url(#wc)" opacity=".55"><path d="M-20 128c80-14 160-8 240-14s140-6 200 0v14c-60-4-120-2-200 4s-160 2-240 10z" fill="#fff"/></g>
+    <use href="#s-shell" x="40" y="214" width="26" height="26" transform="rotate(20 53 227)"/>
+    <use href="#s-starfish" x="320" y="200" width="32" height="32" transform="rotate(-15 336 216)"/>
+    <use href="#s-spiral" x="300" y="248" width="22" height="22"/>
+  </svg>
+  <svg class="bottle" viewBox="0 0 360 200" aria-hidden="true">
+    <ellipse cx="180" cy="150" rx="140" ry="12" fill="#8a6443" opacity=".18" filter="url(#glow)"/>
+    <g class="bottle-body">
+      <!-- paper roll inside -->
+      <g class="scroll">
+        <rect x="74" y="78" width="126" height="44" rx="6" fill="url(#g-paper)" stroke="#d9c7a5" stroke-width="1"/>
+        <ellipse cx="200" cy="100" rx="8" ry="22" fill="#efe2c8" stroke="#d9c7a5" stroke-width="1"/>
+        <ellipse cx="200" cy="100" rx="3.5" ry="12" fill="#fffaf0" stroke="#d9c7a5" stroke-width=".8"/>
+        <path d="M118 78v44" stroke="#f08a7e" stroke-width="5"/>
+        <text id="seal-text" x="150" y="106" text-anchor="middle" font-family="Caveat, cursive" font-size="22" font-weight="600" fill="#1f3340">I &amp; T</text>
+      </g>
+      <!-- glass -->
+      <path d="M40 72c0-14 12-24 30-24h140c14 0 24 4 30 12l12 0c6 0 10 4 10 10v40c0 6-4 10-10 10h-12c-6 8-16 12-30 12H70c-18 0-30-10-30-24z" fill="url(#g-glass)" stroke="#8fc6c9" stroke-width="1.5"/>
+      <path d="M58 64c40-6 110-8 170-6" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".75"/>
+      <path d="M56 124c40 4 110 6 170 4" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".35"/>
+      <path d="M248 78h12v38h-12z" fill="#fff" opacity=".18"/>
+      <!-- cork -->
+      <g class="cork">
+        <rect x="252" y="76" width="30" height="42" rx="6" fill="url(#g-cork)" stroke="#6f4f36" stroke-width="1"/>
+        <path d="M258 84h18M258 92h18M258 100h18M258 108h18" stroke="#6f4f36" stroke-width="1" opacity=".5"/>
+      </g>
+    </g>
+  </svg>
+  <p class="env-hint" data-i18n="envelope.tap">Tap the bottle</p>
+  <button type="button" class="env-skip" id="env-skip" data-i18n="envelope.skip">Skip intro</button>
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="nav" class="nav" aria-label="Sections">
+  <a href="#home" data-i18n="nav.home">Home</a>
+  <a href="#details" data-i18n="nav.details">Details</a>
+  <a href="#timeline" data-i18n="nav.timeline">Timeline</a>
+  <a href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
+  <button type="button" id="lang-toggle" class="lang" data-i18n="nav.lang" data-i18n-aria="nav.lang.aria" aria-label="Switch language to Portuguese">Português</button>
+</nav>
+
+<main id="main" class="page">
+
+  <!-- ===================== HERO ===================== -->
+  <header id="home" class="hero" data-sky="day">
+    <div class="sky" aria-hidden="true">
+      <div class="stars" data-stars></div>
+      <svg class="cloud c1" viewBox="0 0 200 80"><use href="#s-cloud"/></svg>
+      <svg class="cloud c2" viewBox="0 0 200 80"><use href="#s-cloud"/></svg>
+      <svg class="sun" viewBox="0 0 120 120"><use href="#s-sun"/></svg>
+      <svg class="moon" viewBox="0 0 120 120"><use href="#s-moon"/></svg>
+    </div>
+    <button type="button" class="sky-toggle" id="sky-toggle" aria-label="Change the time of day in the painting" data-i18n-aria="sky.aria">
+      <span class="sky-label" id="sky-label">Painted at midday</span>
+    </button>
+
+    <div class="hero-names">
+      <p class="kicker script" data-i18n="hero.kicker">are getting married on the sand</p>
+      <h1>
+        <span class="name" data-bind="couple.first">Isla</span>
+        <span class="amp" data-i18n="hero.and">&amp;</span>
+        <span class="name" data-bind="couple.partnerFirst">Theo</span>
+      </h1>
+      <p class="hero-date" data-i18n="hero.date">Saturday, 4 September 2027</p>
+      <p class="hero-place label" data-i18n="hero.place">Comporta · Portugal</p>
+    </div>
+
+    <div class="sea" data-waves aria-hidden="true"></div>
+
+    <div class="shore" aria-hidden="true">
+      <svg class="sand" viewBox="0 0 400 190" preserveAspectRatio="none">
+        <g filter="url(#wc-soft)">
+          <path d="M-10 0c80 14 160 6 240 10s120 6 180 0v200H-10z" fill="url(#g-wet)"/>
+          <path d="M-10 46c90-16 180-8 260-12s100 0 160 4v160H-10z" fill="url(#g-sand)"/>
+        </g>
+        <g filter="url(#wc)" opacity=".5"><path d="M-10 8c80 12 160 6 240 10s120 4 180 0v10c-60 2-120 0-180-2s-160 6-240-6z" fill="#fff"/></g>
+      </svg>
+      <div class="tint"></div>
+      <div class="footprints" data-footprints></div>
+      <svg class="palm palm-l" viewBox="0 0 160 240"><use href="#s-palm"/></svg>
+      <svg class="palm palm-r" viewBox="0 0 160 240"><use href="#s-palm"/></svg>
+      <svg class="arch" viewBox="0 0 260 220"><use href="#s-arch"/></svg>
+      <div class="shells" data-shells></div>
+    <div class="countdown" id="countdown" aria-live="polite">
+      <div class="count-badge" style="--i:0"><span class="num" data-count="days">—</span><span class="lbl" data-i18n="count.days">days</span></div>
+      <div class="count-badge" style="--i:1"><span class="num" data-count="hours">—</span><span class="lbl" data-i18n="count.hours">hours</span></div>
+      <div class="count-badge" style="--i:2"><span class="num" data-count="mins">—</span><span class="lbl" data-i18n="count.mins">minutes</span></div>
+      <p class="count-until script" data-i18n="count.until">until the tide brings us together</p>
+    </div>
+    </div>
+
+
+  </header>
+
+  <!-- ===================== WELCOME ===================== -->
+  <section id="welcome" class="section welcome reveal">
+    <div class="wash coral-wash" aria-hidden="true"><svg viewBox="0 0 160 140"><use href="#s-coral"/></svg></div>
+    <h2 class="title"><span class="brush" aria-hidden="true"><svg viewBox="0 0 300 40" preserveAspectRatio="none"><use href="#s-brush"/></svg></span><span data-i18n="welcome.title">Welcome to the shore</span></h2>
+    <p class="body" data-i18n="welcome.body">This page is your message in a bottle.</p>
+    <div class="shell-row wash" data-shells="row" aria-hidden="true"></div>
+  </section>
+
+  <!-- ===================== FORMAL INVITATION ===================== -->
+  <section id="invite" class="section invite reveal">
+    <div class="frond-frame wash" aria-hidden="true">
+      <svg class="frond f1" viewBox="0 0 200 80"><use href="#s-frond"/></svg>
+      <svg class="frond f2" viewBox="0 0 200 80"><use href="#s-frond"/></svg>
+    </div>
+    <p class="label" data-i18n="invite.together">Together with their families</p>
+    <p class="full-name"><span data-bind="couple.first">Isla</span> <span data-bind="couple.last">Moreira</span></p>
+    <p class="script accent" data-i18n="invite.and">and</p>
+    <p class="full-name"><span data-bind="couple.partnerFirst">Theo</span> <span data-bind="couple.partnerLast">Lindqvist</span></p>
+    <p class="accent" data-i18n="invite.verb">invite you to celebrate their marriage</p>
+    <p class="label" data-i18n="invite.date">Saturday, the fourth of September, two thousand and twenty-seven</p>
+  </section>
+
+  <!-- ===================== CEREMONY & RECEPTION ===================== -->
+  <section id="details" class="section details reveal">
+    <h2 class="title"><span class="brush" aria-hidden="true"><svg viewBox="0 0 300 40" preserveAspectRatio="none"><use href="#s-brush"/></svg></span><span data-i18n="ceremony.title">Ceremony &amp; Reception</span></h2>
+    <div class="map-card wash">
+      <svg class="map" viewBox="0 0 320 240" role="img" aria-label="Watercolour map of the Comporta coast with the shuttle route from Lisbon"><use href="#s-map"/></svg>
+    </div>
+    <p class="label" data-i18n="ceremony.where">Where we celebrate</p>
+    <p class="venue" data-bind="ceremony.venue">Praia do Carvalhal</p>
+    <p class="label soft" data-bind="ceremony.area">Comporta · Alentejo</p>
+    <p class="time-line"><span data-i18n="ceremony.from">From</span> <span data-time="ceremony.start">4:30 PM</span></p>
+    <dl class="spaces">
+      <div><dt data-i18n="ceremony.ceremony">Ceremony</dt><dd data-bind-lang="ceremony.ceremonySpace">On the sand</dd></div>
+      <div><dt data-i18n="ceremony.reception">Reception</dt><dd data-bind-lang="ceremony.receptionSpace">Sal Beach Club</dd></div>
+    </dl>
+    <p class="body" data-i18n="ceremony.body">We will say our vows barefoot.</p>
+    <div class="actions">
+      <a class="link-btn" data-maps="ceremony" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1a5 5 0 0 1 5 5c0 3.5-5 9-5 9S3 9.5 3 6a5 5 0 0 1 5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="currentColor"/></svg>
+        <span data-i18n="btn.maps">Open in Maps</span>
+      </a>
+      <a class="link-btn" data-ics="ceremony" href="#">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm0 4v7h10V6H3zm2-3v2h2V3H5zm4 0v2h2V3H9z" fill="currentColor"/></svg>
+        <span data-i18n="btn.calendar">Add to calendar</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== DRESS CODE ===================== -->
+  <section id="dress" class="section dress reveal">
+    <div class="figures wash" aria-hidden="true">
+      <svg class="fig him" style="--i:0" viewBox="-22 -66 44 112"><use href="#s-him" x="-22" y="-66" width="44" height="112"/></svg>
+      <svg class="fig her" style="--i:1" viewBox="-28 -66 56 112"><use href="#s-her" x="-28" y="-66" width="56" height="112"/></svg>
+      <svg class="fig basket" style="--i:2" viewBox="0 0 120 90"><use href="#s-basket"/></svg>
+    </div>
+    <h2 class="title"><span class="brush" aria-hidden="true"><svg viewBox="0 0 300 40" preserveAspectRatio="none"><use href="#s-brush"/></svg></span><span data-i18n="dress.title">Dress Code</span></h2>
+    <p class="dress-code script" data-i18n="dress.code">Beach formal, barefoot welcome</p>
+    <p class="body" data-i18n="dress.body">Linen suits, flowing dresses.</p>
+  </section>
+
+  <!-- ===================== OUR STORY ===================== -->
+  <section id="story" class="section story reveal">
+    <div class="sunset wash" aria-hidden="true">
+      <svg viewBox="0 0 400 230">
+        <g filter="url(#wc-soft)">
+          <rect x="-10" y="0" width="420" height="140" fill="url(#g-sunset)"/>
+          <circle cx="200" cy="120" r="34" fill="url(#g-sun)"/>
+          <path d="M-10 128c80-12 160-6 240-10s120-4 180 0v70H-10z" fill="url(#g-sunsea)"/>
+          <path d="M-10 182c90-18 180-10 260-14s100 0 160 2v60H-10z" fill="url(#g-sand)"/>
+        </g>
+        <g filter="url(#wc)" opacity=".6"><path d="M150 150c20-4 60-4 100 0c-30 4-70 4-100 0zM120 164c30-4 110-4 160 0c-40 4-120 4-160 0z" fill="#fff"/></g>
+        <use href="#s-boat" x="232" y="122" width="34" height="26"/>
+        <use href="#s-chair" x="80" y="150" width="56" height="62" transform="rotate(-6 108 181)"/>
+        <use href="#s-chair" x="250" y="152" width="56" height="62" transform="rotate(6 278 183)"/>
+      </svg>
+    </div>
+    <h2 class="title"><span class="brush" aria-hidden="true"><svg viewBox="0 0 300 40" preserveAspectRatio="none"><use href="#s-brush"/></svg></span><span data-i18n="story.title">Our Story</span></h2>
+    <p class="body" data-i18n="story.body">Isla was reading on a beach chair.</p>
+  </section>
+
+  <!-- ===================== TIMELINE ===================== -->
+  <section id="timeline" class="section timeline reveal">
+    <h2 class="title"><span class="brush" aria-hidden="true"><svg viewBox="0 0 300 40" preserveAspectRatio="none"><use href="#s-brush"/></svg></span><span data-i18n="timeline.title">Tide Timeline</span></h2>
+    <ol class="tl-list" id="tl-list"></ol>
+  </section>
+
+  <!-- ===================== RECOVERY DAY ===================== -->
+  <section id="recovery" class="section recovery reveal">
+    <div class="recovery-art wash" aria-hidden="true">
+      <svg class="umbrella" viewBox="0 0 160 200"><use href="#s-umbrella"/></svg>
+      <svg class="surf" viewBox="0 0 80 240"><use href="#s-surf"/></svg>
+      <svg class="pineapple" viewBox="0 0 90 140"><use href="#s-pineapple"/></svg>
+    </div>
+    <h2 class="title"><span class="brush" aria-hidden="true"><svg viewBox="0 0 300 40" preserveAspectRatio="none"><use href="#s-brush"/></svg></span><span data-i18n="recovery.title">Recovery Day</span></h2>
+    <p class="label" data-i18n="recovery.sub">Join us the day after</p>
+    <p class="venue" data-bind="recovery.venue">Cavalariça Comporta</p>
+    <p class="label soft" data-bind="recovery.area">Comporta village</p>
+    <p class="time-line"><span data-i18n="recovery.date">Sunday, 5 September 2027</span> · <span data-i18n="recovery.from">From 12 PM</span></p>
+    <p class="address" data-bind="recovery.address">Rua do Secador 9, Comporta</p>
+    <p class="body" data-i18n="recovery.body">A long, lazy lunch.</p>
+    <div class="actions">
+      <a class="link-btn" data-maps="recovery" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1a5 5 0 0 1 5 5c0 3.5-5 9-5 9S3 9.5 3 6a5 5 0 0 1 5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="currentColor"/></svg>
+        <span data-i18n="btn.maps">Open in Maps</span>
+      </a>
+      <a class="link-btn" data-ics="recovery" href="#">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm0 4v7h10V6H3zm2-3v2h2V3H5zm4 0v2h2V3H9z" fill="currentColor"/></svg>
+        <span data-i18n="btn.calendar">Add to calendar</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== GIFTS ===================== -->
+  <section id="gifts" class="section gifts reveal">
+    <div class="chest wash" aria-hidden="true"><svg viewBox="0 0 220 160"><use href="#s-chest"/></svg></div>
+    <h2 class="title"><span class="brush" aria-hidden="true"><svg viewBox="0 0 300 40" preserveAspectRatio="none"><use href="#s-brush"/></svg></span><span data-i18n="gifts.title">Gifts</span></h2>
+    <p class="body" data-i18n="gifts.body">Your presence is the greatest gift.</p>
+  </section>
+
+  <!-- ===================== RSVP (postcard) ===================== -->
+  <section id="rsvp" class="section rsvp reveal">
+    <h2 class="title"><span class="brush" aria-hidden="true"><svg viewBox="0 0 300 40" preserveAspectRatio="none"><use href="#s-brush"/></svg></span><span data-i18n="rsvp.title">RSVP</span></h2>
+    <p class="label"><span data-i18n="rsvp.by">Kindly respond by</span> <span data-date="rsvpDeadline">1 June 2027</span></p>
+
+    <form id="rsvp-form" class="postcard wash" novalidate>
+      <div class="postcard-head">
+        <p class="script to" data-i18n="rsvp.postcard.to">To Isla &amp; Theo</p>
+        <div class="postmark" aria-hidden="true">
+          <svg viewBox="0 0 100 100"><g fill="none" stroke="#3b5566" stroke-width="1.6" opacity=".8" filter="url(#ink)"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="31"/><path d="M60 50h70M60 56h70M60 62h70"/></g><text x="50" y="47" text-anchor="middle" font-family="Karla, sans-serif" font-size="9" letter-spacing="1.5" fill="#3b5566">COMPORTA</text><text x="50" y="59" text-anchor="middle" font-family="Karla, sans-serif" font-size="8" fill="#3b5566">04 · 09 · 2027</text></svg>
+        </div>
+        <svg class="stamp" viewBox="0 0 100 120" aria-hidden="true"><use href="#s-stamp"/></svg>
+      </div>
+
+      <div class="postcard-body">
+        <div class="field">
+          <label for="f-name"><span data-i18n="rsvp.name">Full name</span> <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required data-i18n-ph="rsvp.name.ph" placeholder="Enter your full name" />
+          <p class="err" data-err="name" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="f-email" data-i18n="rsvp.email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" data-i18n-ph="rsvp.email.ph" placeholder="So we can confirm back to you" />
+          <p class="err" data-err="email" role="alert"></p>
+        </div>
+        <fieldset class="field">
+          <legend><span data-i18n="rsvp.attending">Will you be attending?</span> <span class="req" aria-hidden="true">*</span></legend>
+          <label class="radio"><input type="radio" name="attending" value="yes" /><span class="dot"></span><span data-i18n="rsvp.yes">Sees you on the sand</span></label>
+          <label class="radio"><input type="radio" name="attending" value="no" /><span class="dot"></span><span data-i18n="rsvp.no">Sends love from afar</span></label>
+          <p class="err" data-err="attending" role="alert"></p>
+        </fieldset>
+        <p class="note">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM2.5 14c0-3 2.5-5 5.5-5s5.5 2 5.5 5z" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>
+          <span data-i18n="rsvp.adults">Your invitation is for you only.</span>
+        </p>
+        <div class="field">
+          <label for="f-diet" data-i18n="rsvp.diet">Allergies or dietary requirements</label>
+          <textarea id="f-diet" name="diet" rows="2" data-i18n-ph="rsvp.diet.ph" placeholder="Vegetarian, gluten-free…"></textarea>
+        </div>
+        <fieldset class="field">
+          <legend data-i18n="rsvp.shuttle">Would you like a seat on our shuttle from Lisbon?</legend>
+          <label class="radio"><input type="radio" name="shuttle" value="yes" /><span class="dot"></span><span data-i18n="rsvp.shuttle.yes">Yes, I would love a seat on the bus</span></label>
+          <label class="radio"><input type="radio" name="shuttle" value="no" /><span class="dot"></span><span data-i18n="rsvp.shuttle.no">No, I will drive or book a taxi</span></label>
+        </fieldset>
+        <div class="field">
+          <label for="f-message" data-i18n="rsvp.message">A message for the bottle</label>
+          <textarea id="f-message" name="message" rows="3" class="handwriting" data-i18n-ph="rsvp.message.ph" placeholder="Share a wish, a memory…"></textarea>
+        </div>
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button type="submit" class="btn-primary" id="rsvp-submit">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14.5 1.5L1.5 7l5.5 2 2 5.5z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M7 9l7.5-7.5" stroke="currentColor" stroke-width="1.2"/></svg>
+          <span data-i18n="rsvp.send">Send the postcard</span>
+        </button>
+        <p class="form-status" id="rsvp-status" role="status"></p>
+      </div>
+    </form>
+
+    <div class="rsvp-done" id="rsvp-done" hidden>
+      <svg viewBox="0 0 60 60" aria-hidden="true"><use href="#s-starfish"/></svg>
+      <h3 class="title small"><span data-i18n="rsvp.done.title">Thank you</span></h3>
+      <p class="body" id="rsvp-done-text"></p>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer reveal">
+    <div class="lighthouse wash" aria-hidden="true"><svg viewBox="0 0 200 240"><use href="#s-lighthouse"/></svg></div>
+    <p class="footer-names"><span data-bind="couple.first">Isla</span> <span class="amp">&amp;</span> <span data-bind="couple.partnerFirst">Theo</span></p>
+    <p class="label" data-date-long="date">September 4, 2027</p>
+    <p class="script footer-line" data-i18n="footer.line">See you on the sand</p>
+    <p class="credit" id="credit" hidden><span data-i18n="footer.made">Painted with love by</span> <a id="credit-link" href="#" rel="noopener"></a></p>
+    <a class="to-top" href="#home" data-i18n="footer.back">Back to the shore</a>
+  </footer>
+</main>
+
+<button type="button" id="tour" class="tour" hidden aria-pressed="true">
+  <svg class="ic-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3h3v10H4zM9 3h3v10H9z" fill="currentColor"/></svg>
+  <svg class="ic-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>
+  <span class="tour-label"></span>
+</button>
+
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="illustrations.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
