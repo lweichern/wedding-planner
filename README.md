@@ -78,3 +78,25 @@ its own illustrations and three ideas of its own:
 The watercolour look is an SVG filter (`#wc` in the sprite): a displaced
 ragged edge, soft bleed, pigment granulation and darker pooling where the
 wash dries. Washes overlap with multiply blending the way real pigment does.
+
+## Editorial minimal variant
+
+`editorial/` is a third invitation, typeset like a magazine issue, for a
+wedding in a converted shipyard hall in Copenhagen, in English and Danish.
+Open `editorial/index.html`. Ink on uncoated paper, hairlines, Bodoni Moda,
+Instrument Sans and DM Mono, with one cobalt accent. Its own ideas:
+
+- **Issue No. 1.** A masthead, a typographic cover with the names as the
+  cover line and a barcode that encodes the date, a contents page with
+  dotted leaders, and a living folio at the foot of the screen that shows
+  which page you are on as you scroll.
+- **It prints itself.** The opening is a printing pass: a cobalt line sweeps
+  down the page and the ink appears beneath it.
+- **Split-flap countdown.** Days, hours and minutes on a departure-board
+  that flips into place on load and flips each minute.
+- **Line drawings drawn by scrolling.** The hall, a bicycle, two coupes, the
+  couple in profile, the harbour-bath ladder and a gift, each a single ink
+  line that draws itself as it comes into view.
+- **Editorial details.** A story headlined with its live word count, a drop
+  cap, pull quotes, a schedule set as a table, colour swatches for the dress
+  code, a reply card with a cut line, and a colophon.

@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Anouk &amp; Rafael · 11 September 2027</title>
+  <meta name="description" content="Issue No. 1: the wedding of Anouk Vermeer and Rafael Costa, Saturday 11 September 2027, Halle K, Copenhagen." />
+  <meta name="theme-color" content="#f6f5f1" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f6f5f1'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='36' fill='%2316181a'%3E%26%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="skip.link">Skip to content</a>
+
+<!-- ============================================================
+     PRINTING PASS
+     A thin cobalt line sweeps down the page and the ink appears
+     beneath it. Tap, Enter or Skip finishes the pass at once.
+     ============================================================ -->
+<div id="press" class="press" role="button" tabindex="0" aria-label="The invitation is printing. Press enter or tap to finish." data-i18n-aria="press.aria">
+  <div class="press-paper" aria-hidden="true"></div>
+  <div class="press-line" aria-hidden="true"><p class="press-ticker mono" data-i18n="press.ticker">Printing · No. 1 · 11.09.2027</p></div>
+  <button type="button" class="press-skip mono" id="press-skip" data-i18n="press.skip">Skip</button>
+</div>
+
+<!-- ============================================================
+     NAVIGATION + LIVING FOLIO
+     ============================================================ -->
+<nav id="nav" class="nav" aria-label="Sections">
+  <a href="#cover" class="mono" data-i18n="nav.cover">Cover</a>
+  <a href="#ceremony" class="mono" data-i18n="nav.ceremony">Ceremony</a>
+  <a href="#schedule" class="mono" data-i18n="nav.schedule">Schedule</a>
+  <a href="#rsvp" class="mono" data-i18n="nav.rsvp">Reply</a>
+  <button type="button" id="lang-toggle" class="lang mono" data-i18n="nav.lang" data-i18n-aria="nav.lang.aria" aria-label="Switch language to Danish">Dansk</button>
+</nav>
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+<div id="folio" class="folio mono" aria-live="polite">
+  <span class="folio-left"><span class="names"><span data-bind="couple.first">Anouk</span> &amp; <span data-bind="couple.partnerFirst">Rafael</span> · </span><span data-i18n="mast.no">No.</span> <span data-bind="issue.number">1</span></span>
+  <span class="folio-right"><span data-i18n="folio.page">p.</span> <span id="folio-page">1</span> <span data-i18n="folio.of">of</span> <span id="folio-total">10</span> · <span id="folio-title">Cover</span></span>
+</div>
+
+<main id="main" class="page">
+
+  <!-- ===================== COVER ===================== -->
+  <header id="cover" class="cover" data-page="1" data-folio="nav.cover">
+    <div class="masthead">
+      <div class="mast-row mono">
+        <span><span data-i18n="mast.vol">Vol.</span> <span data-bind="issue.volume">I</span> · <span data-i18n="mast.no">No.</span> <span data-bind="issue.number">1</span></span>
+        <span data-i18n="cover.city">Copenhagen</span>
+        <span data-i18n="mast.price">Price: your presence</span>
+      </div>
+      <p class="mast-of" data-i18n="mast.of">The wedding of</p>
+    </div>
+
+    <h1 class="cover-names">
+      <span class="name n1" data-bind="couple.first">Anouk</span>
+      <span class="amp" aria-hidden="true">&amp;</span>
+      <span class="name n2" data-bind="couple.partnerFirst">Rafael</span>
+    </h1>
+
+    <p class="cover-date"><span data-i18n="cover.date">Saturday 11 September 2027</span></p>
+
+    <div class="cover-foot">
+      <ul class="cover-lines">
+        <li><a href="#ceremony" data-i18n="cover.line1">The ceremony, p. 3</a></li>
+        <li><a href="#dress" data-i18n="cover.line2">Dress code, decoded, p. 5</a></li>
+        <li><a href="#story" data-i18n-n="cover.line3">A love story in 212 words, p. 6</a></li>
+        <li><a href="#rsvp" data-i18n="cover.line4">Reply card inside, p. 9</a></li>
+      </ul>
+      <div class="barcode" aria-hidden="true">
+        <svg id="barcode" viewBox="0 0 120 40" preserveAspectRatio="none"></svg>
+        <span class="mono" id="barcode-text">11 09 2027</span>
+      </div>
+    </div>
+
+    <section class="press-time" aria-label="Countdown">
+      <p class="kicker mono" data-i18n="count.title">Time to press</p>
+      <div class="flapboard" id="flapboard">
+        <div class="flap-group" data-count="days"><div class="flaps"></div><span class="flap-label mono" data-i18n="count.days">Days</span></div>
+        <div class="flap-group" data-count="hours"><div class="flaps"></div><span class="flap-label mono" data-i18n="count.hours">Hrs</span></div>
+        <div class="flap-group" data-count="mins"><div class="flaps"></div><span class="flap-label mono" data-i18n="count.mins">Min</span></div>
+      </div>
+      <p class="count-note mono" id="count-note" hidden></p>
+    </section>
+  </header>
+
+  <!-- ===================== CONTENTS ===================== -->
+  <section id="contents" class="section toc reveal" data-page="2" data-folio="toc.title">
+    <p class="kicker mono" data-i18n="toc.sub">In this issue</p>
+    <h2 class="title" data-i18n="toc.title">Contents</h2>
+    <ol class="toc-list">
+      <li><a href="#ceremony"><span data-i18n="toc.ceremony">The Ceremony</span><span class="leader"></span><span class="mono">3</span></a></li>
+      <li><a href="#schedule"><span data-i18n="toc.schedule">The Schedule</span><span class="leader"></span><span class="mono">4</span></a></li>
+      <li><a href="#dress"><span data-i18n="toc.dress">Dress Code, Decoded</span><span class="leader"></span><span class="mono">5</span></a></li>
+      <li><a href="#story"><span data-i18n="toc.story">A Love Story</span><span class="leader"></span><span class="mono">6</span></a></li>
+      <li><a href="#after"><span data-i18n="toc.after">The Day After</span><span class="leader"></span><span class="mono">7</span></a></li>
+      <li><a href="#gifts"><span data-i18n="toc.gifts">On Gifts</span><span class="leader"></span><span class="mono">8</span></a></li>
+      <li><a href="#rsvp"><span data-i18n="toc.rsvp">Reply Card</span><span class="leader"></span><span class="mono">9</span></a></li>
+      <li><a href="#colophon"><span data-i18n="toc.colophon">Colophon</span><span class="leader"></span><span class="mono">10</span></a></li>
+    </ol>
+  </section>
+
+  <!-- ===================== CEREMONY ===================== -->
+  <section id="ceremony" class="section reveal" data-page="3" data-folio="toc.ceremony">
+    <p class="kicker mono" data-i18n="ceremony.kicker">01 · The Ceremony</p>
+    <h2 class="headline" data-i18n="ceremony.title">Vows in a warehouse, then a long table in the courtyard</h2>
+    <p class="lede" data-i18n="ceremony.lede">We are getting married in Halle K.</p>
+
+    <figure class="lineart hall">
+      <svg class="draw" viewBox="0 0 320 170" role="img" aria-label="Line drawing of the hall with saw-tooth skylights and the harbour in front">
+        <path d="M14 150V74L54 44V74L94 44V74L134 44V74L174 44V74L214 44V74L254 44V74L294 44V150"/>
+        <path d="M14 150H306"/>
+        <path d="M34 150V112H60V150M150 150V96H172V150"/>
+        <path d="M94 90h22v16H94zM214 90h22v16h-22zM254 90h22v16h-22z"/>
+        <path d="M8 160c18-8 30 8 48 0s30 8 48 0 30 8 48 0 30 8 48 0 30 8 48 0 30 8 48 0 18 8 24 0"/>
+        <path d="M256 64l-8-18 8-6 8 6z"/>
+      </svg>
+      <figcaption class="mono"><span data-bind="ceremony.venue">Halle K</span> · <span data-bind="ceremony.area">Refshaleøen</span></figcaption>
+    </figure>
+
+    <dl class="facts">
+      <div><dt class="mono" data-i18n="ceremony.where">Where</dt><dd><span data-bind="ceremony.venue">Halle K</span><br /><span class="soft" data-bind="ceremony.address">Refshalevej 173</span></dd></div>
+      <div><dt class="mono" data-i18n="ceremony.when">When</dt><dd><span data-i18n="cover.date">Saturday 11 September 2027</span><br /><span class="soft"><span data-i18n="ceremony.from">Doors</span> <span data-time="ceremony.start">14:30</span></span></dd></div>
+      <div><dt class="mono" data-i18n="ceremony.ceremony">Ceremony</dt><dd data-bind-lang="ceremony.ceremonySpace">The Hall</dd></div>
+      <div><dt class="mono" data-i18n="ceremony.reception">Reception</dt><dd data-bind-lang="ceremony.receptionSpace">The Courtyard</dd></div>
+    </dl>
+
+    <blockquote class="pull" data-i18n="ceremony.quote">“Three o’clock, sharp.”</blockquote>
+
+    <h3 class="sub" data-i18n="ceremony.getting">Getting there</h3>
+    <p class="body" data-i18n="ceremony.getting.body">Refshaleøen is twelve minutes by harbour bus.</p>
+    <figure class="lineart bike small">
+      <svg class="draw" viewBox="0 0 200 110" aria-hidden="true">
+        <path d="M40 80a26 26 0 1 0 .1 0M160 80a26 26 0 1 0 .1 0"/>
+        <path d="M40 80l34-40h50l36 40M74 40l20 40h66M94 80L120 40M120 40h-14M118 30l6 10M150 40h16"/>
+      </svg>
+    </figure>
+    <div class="actions">
+      <a class="link mono" data-maps="ceremony" href="#" target="_blank" rel="noopener"><span data-i18n="btn.maps">Open in Maps</span> ↗</a>
+      <a class="link mono" data-ics="ceremony" href="#"><span data-i18n="btn.calendar">Add to calendar</span> ↓</a>
+    </div>
+  </section>
+
+  <!-- ===================== SCHEDULE ===================== -->
+  <section id="schedule" class="section reveal" data-page="4" data-folio="toc.schedule">
+    <p class="kicker mono" data-i18n="schedule.kicker">02 · The Schedule</p>
+    <h2 class="headline" data-i18n="schedule.title">The day, in order</h2>
+    <ol class="schedule" id="schedule-list"></ol>
+    <figure class="lineart coupes small">
+      <svg class="draw" viewBox="0 0 200 120" aria-hidden="true">
+        <path d="M60 14c0 30-10 42-24 48v38M24 100h24M24 14h36c2 22-6 40-24 48c-18-8-26-26-24-48z" transform="translate(16 0) rotate(-12 48 60)"/>
+        <path d="M140 14c0 30 10 42 24 48v38M152 100h24M140 14h36c2 22-6 40-24 48c-18-8-26-26-24-48z" transform="translate(-16 0) rotate(12 152 60)"/>
+        <path d="M100 30l2-8M108 34l6-6M92 34l-6-6"/>
+      </svg>
+    </figure>
+  </section>
+
+  <!-- ===================== DRESS CODE ===================== -->
+  <section id="dress" class="section reveal" data-page="5" data-folio="toc.dress">
+    <p class="kicker mono" data-i18n="dress.kicker">03 · Dress Code, Decoded</p>
+    <h2 class="headline" data-i18n="dress.title">Black tie, loosened</h2>
+    <p class="body" data-i18n="dress.body">Dinner jackets and long dresses.</p>
+    <p class="kicker mono small" data-i18n="dress.swatches">Colours we would love to see</p>
+    <ul class="swatches">
+      <li><span class="swatch ink"></span><span class="mono" data-i18n="dress.swatch1">Ink</span></li>
+      <li><span class="swatch ivory"></span><span class="mono" data-i18n="dress.swatch2">Ivory</span></li>
+      <li><span class="swatch cobalt"></span><span class="mono" data-i18n="dress.swatch3">Cobalt</span></li>
+    </ul>
+  </section>
+
+  <!-- ===================== STORY ===================== -->
+  <section id="story" class="section reveal" data-page="6" data-folio="toc.story">
+    <p class="kicker mono" data-i18n="story.kicker">04 · A Love Story</p>
+    <h2 class="headline" id="story-title" data-i18n-n="story.title">In 212 words</h2>
+    <figure class="lineart profiles">
+      <svg class="draw" viewBox="0 0 320 180" role="img" aria-label="Two faces in profile, drawn in one line each, looking at each other">
+        <path d="M70 20c-14 6-22 20-20 36 2 10 8 14 6 24-2 8-8 10-4 16 4 4 10 2 12 8 2 6-2 10 2 14 4 4 10 0 14 4 4 6 2 14 8 18 10 6 22 2 30-8"/>
+        <path d="M250 20c14 6 22 20 20 36-2 10-8 14-6 24 2 8 8 10 4 16-4 4-10 2-12 8-2 6 2 10-2 14-4 4-10 0-14 4-4 6-2 14-8 18-10 6-22 2-30-8"/>
+        <path d="M70 20c30-14 60-10 80 12M250 20c-30-14-60-10-80 12"/>
+        <path d="M150 100c4-4 10-4 14 0"/>
+      </svg>
+    </figure>
+    <p class="story dropcap" data-i18n="story.body">Anouk moved to Copenhagen.</p>
+    <blockquote class="pull" data-i18n="story.pull">“He owned exactly one tool.”</blockquote>
+  </section>
+
+  <!-- ===================== DAY AFTER ===================== -->
+  <section id="after" class="section reveal" data-page="7" data-folio="toc.after">
+    <p class="kicker mono" data-i18n="after.kicker">05 · The Day After</p>
+    <h2 class="headline" data-i18n="after.title">A swim, then eggs</h2>
+    <figure class="lineart ladder">
+      <svg class="draw" viewBox="0 0 320 150" role="img" aria-label="A harbour bath ladder going into gently moving water">
+        <path d="M20 40h200M20 40v20M220 40v20"/>
+        <path d="M120 40v70M150 40v70M120 56h30M120 72h30M120 88h30M120 104h30"/>
+        <path d="M8 118c18-8 30 8 48 0s30 8 48 0 30 8 48 0 30 8 48 0 30 8 48 0 30 8 48 0 18 8 24 0M8 134c18-8 30 8 48 0s30 8 48 0 30 8 48 0 30 8 48 0 30 8 48 0 30 8 48 0 18 8 24 0"/>
+        <path d="M262 30a10 10 0 1 0 .1 0"/>
+      </svg>
+    </figure>
+    <dl class="facts two">
+      <div><dt class="mono" data-i18n="ceremony.where">Where</dt><dd><span data-bind="recovery.venue">Islands Brygge Harbour Bath</span><br /><span class="soft" data-bind="recovery.address">Islands Brygge 14</span></dd></div>
+      <div><dt class="mono" data-i18n="ceremony.when">When</dt><dd><span data-i18n="after.date">Sunday 12 September 2027</span><br /><span class="soft" data-i18n="after.from">From 11 AM</span></dd></div>
+    </dl>
+    <p class="body" data-i18n="after.body">Meet us at the harbour bath.</p>
+    <div class="actions">
+      <a class="link mono" data-maps="recovery" href="#" target="_blank" rel="noopener"><span data-i18n="btn.maps">Open in Maps</span> ↗</a>
+      <a class="link mono" data-ics="recovery" href="#"><span data-i18n="btn.calendar">Add to calendar</span> ↓</a>
+    </div>
+  </section>
+
+  <!-- ===================== GIFTS ===================== -->
+  <section id="gifts" class="section reveal" data-page="8" data-folio="toc.gifts">
+    <p class="kicker mono" data-i18n="gifts.kicker">06 · On Gifts</p>
+    <h2 class="headline" data-i18n="gifts.title">Your presence, mostly</h2>
+    <figure class="lineart gift small">
+      <svg class="draw" viewBox="0 0 200 120" aria-hidden="true">
+        <path d="M40 60h120v50H40zM30 40h140v20H30zM100 40v70"/>
+        <path d="M100 40c-20-4-36-16-28-26s24 4 28 26c4-22 20-36 28-26s-8 22-28 26"/>
+      </svg>
+    </figure>
+    <p class="body" data-i18n="gifts.body">We have the flat, the pump and each other.</p>
+  </section>
+
+  <!-- ===================== REPLY CARD ===================== -->
+  <section id="rsvp" class="section reveal" data-page="9" data-folio="toc.rsvp">
+    <p class="kicker mono" data-i18n="rsvp.kicker">07 · Reply Card</p>
+    <h2 class="headline"><span data-i18n="rsvp.title">Reply by</span> <span data-date="rsvpDeadline">15 June 2027</span></h2>
+    <p class="cut mono"><span aria-hidden="true">✂</span> <span data-i18n="rsvp.cut">Cut along the dotted line, or simply press send</span></p>
+
+    <form id="rsvp-form" class="card" novalidate>
+      <div class="field">
+        <label for="f-name" class="mono"><span data-i18n="rsvp.name">Name</span> <span class="req" aria-hidden="true">*</span></label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required data-i18n-ph="rsvp.name.ph" placeholder="Your full name" />
+        <p class="err" data-err="name" role="alert"></p>
+      </div>
+      <div class="field">
+        <label for="f-email" class="mono" data-i18n="rsvp.email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" data-i18n-ph="rsvp.email.ph" placeholder="For our confirmation" />
+        <p class="err" data-err="email" role="alert"></p>
+      </div>
+      <fieldset class="field">
+        <legend class="mono"><span data-i18n="rsvp.attending">Attendance</span> <span class="req" aria-hidden="true">*</span></legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="attending" value="yes" /><span class="box"></span><span data-i18n="rsvp.yes">Will attend</span></label>
+          <label class="choice"><input type="radio" name="attending" value="no" /><span class="box"></span><span data-i18n="rsvp.no">Cannot attend</span></label>
+        </div>
+        <p class="err" data-err="attending" role="alert"></p>
+      </fieldset>
+      <p class="note" data-i18n="rsvp.adults">Your invitation is for you only.</p>
+      <div class="field">
+        <label for="f-diet" class="mono" data-i18n="rsvp.diet">Dietary requirements</label>
+        <input id="f-diet" name="diet" type="text" data-i18n-ph="rsvp.diet.ph" placeholder="Vegetarian, gluten free, allergies" />
+      </div>
+      <fieldset class="field">
+        <legend class="mono" data-i18n="rsvp.shuttle">Harbour boat from Nyhavn, 13:45</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="shuttle" value="yes" /><span class="box"></span><span data-i18n="rsvp.shuttle.yes">Save me a seat on the boat</span></label>
+          <label class="choice"><input type="radio" name="shuttle" value="no" /><span class="box"></span><span data-i18n="rsvp.shuttle.no">I will make my own way</span></label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="f-message" class="mono" data-i18n="rsvp.message">A note for the couple</label>
+        <textarea id="f-message" name="message" rows="3" data-i18n-ph="rsvp.message.ph" placeholder="A wish, a memory, or a song request"></textarea>
+      </div>
+      <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button type="submit" class="btn mono" id="rsvp-submit"><span data-i18n="rsvp.send">Send reply</span> →</button>
+      <p class="form-status" id="rsvp-status" role="status"></p>
+    </form>
+
+    <div class="rsvp-done" id="rsvp-done" hidden>
+      <h3 class="headline small" data-i18n="rsvp.done.title">Received</h3>
+      <p class="body" id="rsvp-done-text"></p>
+    </div>
+  </section>
+
+  <!-- ===================== COLOPHON ===================== -->
+  <footer id="colophon" class="section colophon reveal" data-page="10" data-folio="toc.colophon">
+    <p class="kicker mono" data-i18n="colophon.kicker">Colophon</p>
+    <p class="colophon-names"><span data-bind="couple.first">Anouk</span> <span class="amp-i">&amp;</span> <span data-bind="couple.partnerFirst">Rafael</span></p>
+    <p class="mono soft" data-date-long="date">Saturday, 11 September 2027</p>
+    <p class="body" data-i18n="colophon.body">Set in Bodoni Moda and Instrument Sans.</p>
+    <p class="credit mono" id="credit" hidden><span data-i18n="colophon.made">Designed by</span> <a id="credit-link" href="#" rel="noopener"></a></p>
+    <a class="link mono to-top" href="#cover" data-i18n="footer.back">Back to the cover</a>
+  </footer>
+</main>
+
+<button type="button" id="tour" class="tour mono" hidden aria-pressed="true">
+  <span class="ic-pause" aria-hidden="true">❚❚</span><span class="ic-play" aria-hidden="true">▶</span>
+  <span class="tour-label"></span>
+</button>
+
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
